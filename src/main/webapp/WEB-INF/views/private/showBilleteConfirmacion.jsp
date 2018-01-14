@@ -34,9 +34,18 @@
 	<p>Número de identificación: <c:out value="${usuario.dni}"></c:out></p>
 	<p>Correo electrónico: <c:out value="${usuario.mail}"></c:out></p>
 
-	<p>
-		<a href="procesarBillete">Confirmar y Finalizar</a>
-	</p>
+
+	<c:choose>
+		<c:when  test = "${billete.confirmado}">
+			<input type="button" value="Print this page" onClick="window.print()">
+			<a href="enviarCorreo">Enviar confirmación de Billete por E-mail</a>
+		</c:when>
+		<c:otherwise>
+			<p>
+				<a href="procesarBillete">Confirmar y Finalizar</a>
+			</p>
+		</c:otherwise>
+	</c:choose>
 	
 </body>
 </html>

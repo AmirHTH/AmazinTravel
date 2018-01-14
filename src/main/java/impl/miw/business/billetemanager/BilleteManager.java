@@ -76,6 +76,7 @@ public class BilleteManager implements BilleteManagerService {
 				
 				if(billete != null){
 					codigoResultadoOperacion = RESULTADO_CORRECTO;
+					billete.setConfirmado(true);
 				}
 				
 			}		

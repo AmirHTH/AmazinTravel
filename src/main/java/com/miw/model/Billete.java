@@ -19,6 +19,8 @@ public class Billete {
 	private double precioFinal;
 	private int billeteVueltaId;
 	
+	private boolean confirmado;
+	
 	private Viaje viajeIda;
 	private Viaje viajeVuelta;
 	
@@ -165,6 +167,14 @@ public class Billete {
 	}
 	public void setViajeVuelta(Viaje viajeVuelta) {
 		this.viajeVuelta = viajeVuelta;
+	}
+	
+	public boolean isConfirmado() {
+		return confirmado;
+	}
+	
+	public void setConfirmado(boolean confirmado) {
+		this.confirmado = confirmado;
 	}
 	
 	

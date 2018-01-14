@@ -209,6 +209,7 @@ public class BilleteController {
 			switch(resultado){
 				case BilleteManager.RESULTADO_CORRECTO:
 					mensajeResultado = "";
+					model.addAttribute("estaConfirmado", "Confirmado");
 					break;
 				case BilleteManager.RESULTADO_ERROR_VUELO_IDA_LLENO:
 					mensajeResultado = "";

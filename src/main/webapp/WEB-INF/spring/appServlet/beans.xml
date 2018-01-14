@@ -51,20 +51,18 @@
 	<bean id="billeteManagerService" class="impl.miw.business.billetemanager.BilleteManagerEJBService">
 		<property name="times" value="3" />
 	</bean>
-
 	<bean id="billeteManager" class="impl.miw.business.billetemanager.BilleteManager" />
-
 	<bean id="billeteDataService" class="impl.miw.persistence.billete.BilleteDAO" />
 	
 	
 	<bean id="usuarioManagerService" class="impl.miw.business.usuariomanager.UsuarioManagerEJBService">
 		<property name="times" value="3" />
 	</bean>
-
 	<bean id="usuarioManager" class="impl.miw.business.usuariomanager.UsuarioManager" />
-
 	<bean id="usuarioDataService" class="impl.miw.persistence.usuario.UsuarioDAO" />
 	
+	<bean id="sendMailManagerService" class="impl.miw.infrastructure.SendMailManagerEJBService" />
+	<bean id="sendMailManager" class="impl.miw.infrastructure.SendMailManager" />
 
 
 </beans>

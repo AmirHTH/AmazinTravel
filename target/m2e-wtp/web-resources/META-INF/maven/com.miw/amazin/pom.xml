@@ -64,10 +64,7 @@
 			<artifactId>log4j</artifactId>
 			<version>1.2.15</version>
 			<exclusions>
-				<exclusion>
-					<groupId>javax.mail</groupId>
-					<artifactId>mail</artifactId>
-				</exclusion>
+				
 				<exclusion>
 					<groupId>javax.jms</groupId>
 					<artifactId>jms</artifactId>
@@ -83,6 +80,12 @@
 			</exclusions>
 			<scope>runtime</scope>
 		</dependency>
+		
+		<dependency>
+			<groupId>javax.mail</groupId>
+	 		<artifactId>mail</artifactId>
+	 		<version>1.4.3</version>
+    	</dependency>
 		<!-- Spring Security -->
 
 		<dependency>
