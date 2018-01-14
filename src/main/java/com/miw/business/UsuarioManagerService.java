@@ -1,7 +1,4 @@
-/**
- * 
- */
-package com.miw.persistence;
+package com.miw.business;
 
 import java.util.Vector;
 
@@ -9,12 +6,12 @@ import com.miw.model.ParamBusquedaViaje;
 import com.miw.model.Usuario;
 import com.miw.model.Viaje;
 
-/**
- * @author Amir H. Tofigh Halati UO240753
- *
- */
-public interface UsuarioDataService {
+public interface UsuarioManagerService {
+	
 	public Usuario crearUsuario(Usuario usuario) throws Exception;
 	public Usuario getUsuario(Usuario usuario) throws Exception;
+
+	//public abstract Viaje getSpecialOffer() throws Exception;	
 	
+	//public Book newBook(Book book) throws Exception;
 }

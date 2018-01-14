@@ -3,25 +3,15 @@
  */
 package com.miw.model;
 
-import org.hibernate.validator.constraints.NotEmpty;
-
 /**
  * @author Amir H. Tofigh Halati UO240753
  *
  */
-public class Usuario {
+public class DatosCobro {
 	private int usuarioId;
-	
-	@NotEmpty
 	private String nombre;
-	
-	@NotEmpty
 	private String apellidos;
-	
-	@NotEmpty
 	private String dni;
-	
-	@NotEmpty
 	private String mail;
 	
 	/**
@@ -90,7 +80,7 @@ public class Usuario {
 	 */
 	@Override
 	public String toString() {
-		return "Usuario [usuarioId=" + usuarioId + ", nombre=" + nombre
+		return "DatosCobro [usuarioId=" + usuarioId + ", nombre=" + nombre
 				+ ", apellidos=" + apellidos + ", dni=" + dni + ", mail="
 				+ mail + "]";
 	}
@@ -119,7 +109,7 @@ public class Usuario {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Usuario other = (Usuario) obj;
+		DatosCobro other = (DatosCobro) obj;
 		if (apellidos == null) {
 			if (other.apellidos != null)
 				return false;

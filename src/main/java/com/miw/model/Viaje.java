@@ -21,13 +21,13 @@ public class Viaje {
 	/**
 	 * @return the viajeid
 	 */
-	public int getViajeid() {
+	public int getViajeId() {
 		return viajeId;
 	}
 	/**
 	 * @param viajeid the viajeid to set
 	 */
-	public void setViajeid(int viajeid) {
+	public void setViajeId(int viajeid) {
 		this.viajeId = viajeid;
 	}
 	/**

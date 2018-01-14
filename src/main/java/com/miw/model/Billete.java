@@ -12,12 +12,33 @@ public class Billete {
 	private int billeteId;
 	private int viajeId;
 	private int usuarioId;
-	private int plazasCompradas;
+	private int plazas;
 	private int numMaletas15;
 	private int numMaletas20;
-	private String cocheTipo;
+	private String cocheTipo = COCHE_ALQUILER_NINGUNO; //Al crear un billete no habrá ningún tipo de coche seleccionado, lo seleccionará el usuario después.
 	private double precioFinal;
 	private int billeteVueltaId;
+	
+	private Viaje viajeIda;
+	private Viaje viajeVuelta;
+	
+	private String tipo = SOLO_IDA ;
+	
+	public final static double PRECIO_MALETA_15 = 15.0;
+	public final static double PRECIO_MALETA_20 = 20.0;
+	
+	public final static double PRECIO_COCHE_ALQUILER_UTILITARIO = 30.0;
+	public final static double PRECIO_COCHE_ALQUILER_FURGONETA = 45.0;
+	
+	public final static String VUELTA = "vuelta";
+	public final static String SOLO_IDA = "solo_ida";
+	
+	public final static String COCHE_ALQUILER_NINGUNO = "Ninguno";
+	public final static String COCHE_ALQUILER_UTILITARIO = "Utilitario";
+	public final static String COCHE_ALQUILER_FURGONETA = "Furgoneta";
+	
+	
+	
 	
 	public int getBilleteVueltaId() {
 		return billeteVueltaId;
@@ -36,6 +57,13 @@ public class Billete {
 	 */
 	public void setBilleteId(int billeteId) {
 		this.billeteId = billeteId;
+	}
+	
+	public String getTipo() {
+		return tipo;
+	}
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 	/**
 	 * @return the viajeId
@@ -89,14 +117,14 @@ public class Billete {
 	/**
 	 * @return the plazasCompradas
 	 */
-	public int getPlazasCompradas() {
-		return plazasCompradas;
+	public int getPlazas() {
+		return plazas;
 	}
 	/**
 	 * @param plazasCompradas the plazasCompradas to set
 	 */
-	public void setPlazasCompradas(int plazasCompradas) {
-		this.plazasCompradas = plazasCompradas;
+	public void setPlazas(int plazas) {
+		this.plazas = plazas;
 	}
 	/**
 	 * @return the cocheTipo
@@ -125,15 +153,31 @@ public class Billete {
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
+	
+	public Viaje getViajeIda() {
+		return viajeIda;
+	}
+	public void setViajeIda(Viaje viajeIda) {
+		this.viajeIda = viajeIda;
+	}
+	public Viaje getViajeVuelta() {
+		return viajeVuelta;
+	}
+	public void setViajeVuelta(Viaje viajeVuelta) {
+		this.viajeVuelta = viajeVuelta;
+	}
+	
+	
 	@Override
 	public String toString() {
 		return "Billete [billeteId=" + billeteId + ", viajeId=" + viajeId
 				+ ", usuarioId=" + usuarioId + ", plazasCompradas="
-				+ plazasCompradas + ", numMaletas15=" + numMaletas15
+				+ plazas + ", numMaletas15=" + numMaletas15
 				+ ", numMaletas20=" + numMaletas20 + ", cocheTipo=" + cocheTipo
 				+ ", precioFinal=" + precioFinal 
-				+ "Billete de vuelta"+ billeteVueltaId +"]";
+				+ " Billete de vuelta="+ billeteVueltaId +"]";
 	}
+	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */
@@ -146,7 +190,7 @@ public class Billete {
 				+ ((cocheTipo == null) ? 0 : cocheTipo.hashCode());
 		result = prime * result + numMaletas15;
 		result = prime * result + numMaletas20;
-		result = prime * result + plazasCompradas;
+		result = prime * result + plazas;
 		result = prime * result + usuarioId;
 		result = prime * result + viajeId;
 		return result;
@@ -174,7 +218,7 @@ public class Billete {
 			return false;
 		if (numMaletas20 != other.numMaletas20)
 			return false;
-		if (plazasCompradas != other.plazasCompradas)
+		if (plazas != other.plazas)
 			return false;
 		if (usuarioId != other.usuarioId)
 			return false;
@@ -182,6 +226,11 @@ public class Billete {
 			return false;
 		return true;
 	}
+	
+
+	
+	
+	
 	
 	
 	
