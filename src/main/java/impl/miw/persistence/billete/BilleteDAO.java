@@ -75,4 +75,71 @@ public class BilleteDAO implements BilleteDataService{
 		return billete;
 	}
 
+	@Override
+	public int cancelarReserva(int codigoReserva, String email) throws Exception {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+	@Override
+	public Billete getBillete(Billete billete) throws Exception {
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Connection con = conectarConBD();
+
+
+		try {	
+			ps = con.prepareStatement("select * from billete where billeteid = ?");
+			ps.setInt(1, billete.getBilleteId()); //Si lo quiere Ida y Vuelta, en la Vuelta, el sitio de Destino será donde se inicie el vuelo
+			rs = ps.executeQuery();
+			
+			billete = null;
+
+			while (rs.next()) {
+				// Completamos los datos del viaje en la entidad
+				billete = new Billete();
+				billete.setViajeId(rs.getInt("Billeteid"));
+				billete.setViajeId(rs.getInt("VIAJEID"));
+				billete.setUsuarioId(rs.getInt("USUARIOID"));
+				billete.setPlazas(rs.getInt("PLAZAS_COMPRADAS"));
+				billete.setNumMaletas15(rs.getInt("MALETAS15"));
+				billete.setNumMaletas20(rs.getInt("MALETAS20"));
+				billete.setCocheTipo(rs.getString("COCHE"));
+				billete.setPrecioFinal(rs.getDouble("PRECIOFINAL"));
+				billete.setBilleteVueltaId(rs.getInt("BILLETEVUELTAID"));
+				
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw (e);
+		} finally {
+			try {
+				ps.close();
+				con.close();
+			} catch (Exception e) {
+			}
+		}
+		// Retornamos el vector de resultado.
+		return billete;
+	}
+	
+	private Connection conectarConBD(){
+		Connection con = null;
+
+		try {
+			String SQL_DRV = "org.hsqldb.jdbcDriver";
+			String SQL_URL = "jdbc:hsqldb:hsql://localhost/amazin";
+
+			// Obtenemos la conexion a la base de datos.
+			Class.forName(SQL_DRV);
+			con = DriverManager.getConnection(SQL_URL, "dflanvin", "amazin");
+			return con;
+		}catch(Exception e){
+			return null;
+		}
+	}
+	
+	
+
 }

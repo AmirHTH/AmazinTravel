@@ -36,10 +36,6 @@ public class BilleteController {
 	@Autowired 
 	BilleteManagerService billeteManagerService;
 	
-	@Autowired 
-	ViajeManagerService viajeManagerService;
-
-	
 	
 	public BilleteManagerService getBilleteManagerService() {
 		return billeteManagerService;
@@ -50,6 +46,7 @@ public class BilleteController {
 		this.billeteManagerService = billeteManagerService;
 	}
 	
+	/*
 	public ViajeManagerService getViajeManagerService() {
 		return viajeManagerService;
 	}
@@ -58,7 +55,7 @@ public class BilleteController {
 	public void setViajeManagerService(ViajeManagerService viajeManagerService) {
 		this.viajeManagerService = viajeManagerService;
 	}
-	
+	*/
 	
 	
 	/*

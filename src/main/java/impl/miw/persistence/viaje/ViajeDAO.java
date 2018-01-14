@@ -314,6 +314,79 @@ public class ViajeDAO implements ViajeDataService {
 	}
 	
 	
+	
+	public boolean restarPlazas(Viaje viaje, int plazas) throws Exception{
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Connection con = conectarConBD();
+
+		try {	
+			ps = con.prepareStatement("select PLAZAS_QUEDAN from viaje where viajeid = ?");
+			ps.setInt(1, viaje.getViajeId()); 
+			rs = ps.executeQuery();
+			Integer numeroPlazasQuedan = 0;
+			
+			while (rs.next()) {
+				numeroPlazasQuedan = rs.getInt("PLAZAS_QUEDAN");
+			}
+					
+			ps = con.prepareStatement("update viaje set PLAZAS_QUEDAN = ? where viajeid = ?");
+			ps.setInt(1, numeroPlazasQuedan-plazas); 
+			ps.setInt(2, viaje.getViajeId()); 
+			rs = ps.executeQuery();
+	
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw (e);
+		} finally {
+			try {
+				ps.close();
+				con.close();
+			} catch (Exception e) {
+			}
+		}
+		
+		return true;
+	}
+
+	@Override
+	public boolean agregarPlazas(Viaje viaje, int plazas) throws Exception {
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Connection con = conectarConBD();
+
+		try {	
+			ps = con.prepareStatement("select PLAZAS_QUEDAN from viaje where viajeid = ?");
+			ps.setInt(1, viaje.getViajeId()); 
+			rs = ps.executeQuery();
+			Integer numeroPlazasQuedan = 0;
+			
+			while (rs.next()) {
+				numeroPlazasQuedan = rs.getInt("PLAZAS_QUEDAN");
+			}
+					
+			ps = con.prepareStatement("update viaje set PLAZAS_QUEDAN = ? where viajeid = ?");
+			ps.setInt(1, numeroPlazasQuedan+plazas); 
+			ps.setInt(2, viaje.getViajeId()); 
+			rs = ps.executeQuery();
+	
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw (e);
+		} finally {
+			try {
+				ps.close();
+				con.close();
+			} catch (Exception e) {
+			}
+		}
+		
+		return true;
+	}
+	
+	
 	/*
 	public synchronized Book newBook(Book book) throws Exception {
 

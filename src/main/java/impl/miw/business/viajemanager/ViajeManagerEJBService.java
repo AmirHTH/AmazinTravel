@@ -63,6 +63,19 @@ public class ViajeManagerEJBService implements ViajeManagerService{
 	public Viaje getViaje(Viaje viaje) throws Exception {
 		return viajeManager.getViaje(viaje);
 	}
+
+	@Override
+	public boolean restarPlazas(Viaje viaje, int plazas) throws Exception {
+		return viajeManager.restarPlazas(viaje, plazas);
+	}
+
+	
+	@Override
+	public boolean agregarPlazas(Viaje viaje, int plazas) throws Exception{
+		return viajeManager.agregarPlazas(viaje, plazas);
+	}
+	
+	
 	
 	
 /*

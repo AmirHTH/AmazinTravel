@@ -43,6 +43,16 @@ private Integer times=0;
 	public int calcularPrecioFinal(Billete billete) throws Exception {
 		return billeteManager.calcularPrecioFinal(billete);
 	}
+	
+	@Override
+	public int cancelarReserva(Billete billete, Usuario usuario) throws Exception{
+		return billeteManager.cancelarReserva(billete, usuario);
+	}
+
+	@Override
+	public Billete getBillete(Billete billete) throws Exception {
+		return billeteManager.getBillete(billete);
+	}
 
 	/*
 	@Override

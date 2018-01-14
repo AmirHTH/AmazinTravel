@@ -27,6 +27,10 @@ public class BilleteManager implements BilleteManagerService {
 	public final static int RESULTADO_ERROR_VUELO_VUELTA_LLENO = 2;
 	public final static int RESULTADO_PROCESO_NO_INICIADO = 3;
 	
+	public final static int RESULTADO_RESERVA_NO_ENCONTRADA = 4;
+	public final static int RESULTADO_USUARIO_NO_ENCONTRADO = 5;
+	public final static int RESULTADO_RESERVA_NO_ENCONTRADA_PARA_ESE_USUARIO = 6;
+	
 	@Autowired
 	private BilleteDataService billeteDataService;
 	
@@ -62,24 +66,30 @@ public class BilleteManager implements BilleteManagerService {
 					codigoResultadoOperacion = RESULTADO_ERROR_VUELO_VUELTA_LLENO;
 					return codigoResultadoOperacion;
 				}
-				
-				//Revisamos si el usuario existe
-				Usuario usuarioEnSistema = usuarioManagerService.getUsuario(usuario);
-				if(usuarioEnSistema == null){
-					//El usuario no existe en el sistema y debemos crearlo
-					usuarioEnSistema = usuarioManagerService.crearUsuario(usuario);
-				}
-				billete.setUsuarioId(usuarioEnSistema.getUsuarioId());
-				
-				//Una vez comprobado todo podemos crear el billete
-				billete = billeteDataService.crearBillete(billete);
-				
-				if(billete != null){
-					codigoResultadoOperacion = RESULTADO_CORRECTO;
-					billete.setConfirmado(true);
-				}
-				
-			}		
+			}	
+			
+			//Revisamos si el usuario existe
+			Usuario usuarioEnSistema = usuarioManagerService.getUsuario(usuario);
+			if(usuarioEnSistema == null){
+				//El usuario no existe en el sistema y debemos crearlo
+				usuarioEnSistema = usuarioManagerService.crearUsuario(usuario);
+			}
+			billete.setUsuarioId(usuarioEnSistema.getUsuarioId());
+			
+			//Una vez comprobado todo podemos crear el billete
+			billete = billeteDataService.crearBillete(billete);
+			//Y restamos el número de Plazas Libres en los vuelos
+			viajeManagerService.restarPlazas(billete.getViajeIda(), billete.getPlazas());
+			
+			if(billete.getTipo().equals(Billete.VUELTA)){
+				viajeManagerService.restarPlazas(billete.getViajeVuelta(), billete.getPlazas());
+			}
+			
+			
+			if(billete != null){
+				codigoResultadoOperacion = RESULTADO_CORRECTO;
+				billete.setConfirmado(true);
+			}
 			
 		}else{
 			//Si no hay plazas libres en el vuelo de ida
@@ -126,6 +136,59 @@ public class BilleteManager implements BilleteManagerService {
 	
 		return 0;		
 	}
+	
+	public Billete getBillete(Billete billete) throws Exception{
+		return billeteDataService.getBillete(billete);
+	}
+	
+
+	public Billete getBilleteDeUsuario(Billete billete, Usuario usuario) throws Exception{
+		
+		//Me dan el codigo de la reserva
+		//Obtener datos reserva completa
+		billete = this.getBillete(billete);
+		
+		if(billete != null){
+			//ObtenerDatosUsuario
+			usuario = usuarioManagerService.getUsuario(usuario);
+		
+			if(usuario != null){
+				if(billete.getUsuarioId() == usuario.getUsuarioId()){
+					return billete;
+				}
+			}
+		}
+		return null;
+	}
+	
+	public int cancelarReserva(Billete billete, Usuario usuario) throws Exception{
+		int codigoResultadoOperacion = RESULTADO_PROCESO_NO_INICIADO;
+		//Comprobamos de nuevo que esa reserva existe para ese usuario
+		billete = this.getBilleteDeUsuario(billete, usuario);
+		
+		if(billete == null){
+			return codigoResultadoOperacion = RESULTADO_RESERVA_NO_ENCONTRADA_PARA_ESE_USUARIO;
+		}
+		
+		Viaje viaje = new Viaje();
+		viaje.setViajeId(billete.getViajeId());
+		viajeManagerService.agregarPlazas(viaje, billete.getPlazas());
+		
+		if(billete.getTipo().equals(Billete.VUELTA)){
+			Viaje viajeVuelta = new Viaje();
+			viajeVuelta.setViajeId(billete.getBilleteVueltaId());
+			viajeManagerService.agregarPlazas(viajeVuelta, billete.getPlazas());
+		}
+		
+		
+		
+	
+		
+		return codigoResultadoOperacion;
+
+	}
+
+	
 
 	
 /*

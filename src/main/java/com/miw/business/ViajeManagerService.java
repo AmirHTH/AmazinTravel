@@ -14,6 +14,9 @@ public interface ViajeManagerService {
 	public int getPlazasLibresViaje(Viaje viaje) throws Exception;
 	
 	public Viaje getViaje(Viaje viaje) throws Exception;
+	
+	public boolean restarPlazas(Viaje viaje, int plazas) throws Exception;
+	public boolean agregarPlazas(Viaje viaje, int plazas) throws Exception;
 
 	//public abstract Viaje getSpecialOffer() throws Exception;	
 	

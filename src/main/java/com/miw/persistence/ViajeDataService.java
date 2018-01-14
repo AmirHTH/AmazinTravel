@@ -27,6 +27,9 @@ public interface ViajeDataService {
 	
 	public Viaje getViaje(Viaje viaje) throws Exception;
 	
+	public boolean restarPlazas(Viaje viaje, int plazas) throws Exception;
+	public boolean agregarPlazas(Viaje viaje, int plazas) throws Exception;
+	
 	//public boolean creaViaje(Viaje viaje) throws Exception;
 	
 }

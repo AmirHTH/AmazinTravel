@@ -87,6 +87,18 @@ public class ViajeManager implements ViajeManagerService {
 	public Viaje getViaje(Viaje viaje) throws Exception {
 		return viajeDataService.getViaje(viaje);
 	}
+
+	@Override
+	public boolean restarPlazas(Viaje viaje, int plazas) throws Exception {
+		return viajeDataService.restarPlazas(viaje, plazas);
+	}
+	
+	@Override
+	public boolean agregarPlazas(Viaje viaje, int plazas) throws Exception{
+		return viajeDataService.agregarPlazas(viaje, plazas);
+	}
+	
+	
 	
 	
 	

@@ -17,6 +17,7 @@ public interface BilleteDataService {
 	//public boolean creaReserva(Billete billete) throws Exception;
 	
 	//public boolean cancelaReserva(int reservaID, String email) throws Exception;
-		
+	public int cancelarReserva(int codigoReserva, String email) throws Exception;
+	public Billete getBillete(Billete billete) throws Exception;
 
 }
