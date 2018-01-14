@@ -188,6 +188,37 @@ public class Billete {
 				+ " Billete de vuelta="+ billeteVueltaId +"]";
 	}
 	
+	
+	public String toStringEmail() {
+		String toStringParaEmail = ""
+				+ "\t " + "Numero de Reserva =" + billeteId + "\n\r"
+				+ "\t\t " + "-----------------------------------------------------" + "\n\r"
+				+ "\t\t " + "  Viaje de Ida" + "\n\r"
+				+ "\t\t " + "-----------------------------------------------------" + "\n\r"
+				+ this.getViajeIda().toStringEmail();
+				;
+				
+				if(this.getTipo().equals(Billete.VUELTA)){
+				toStringParaEmail +=
+					  "\t\t " + "-----------------------------------------------------" + "\n\r"
+					+ "\t\t " + "  Viaje de Vuelta" + "\n\r"
+					+ "\t\t " + "-----------------------------------------------------" + "\n\r"
+					+ this.getViajeVuelta().toStringEmail();
+					;
+				}
+		
+			toStringParaEmail +=
+				  "\n\r\t\t " + "-----------------------------------------------------" + "\n\r"
+				+ "\t\t " + "Numero de Plazas Compradas: " + plazas + "\n\r"
+				+ "\t\t " + "Numero de Maletas de 15 KG a facturar: " + numMaletas15 + "\n\r"
+				+ "\t\t " + "Numero de Maletas de 15 KG a facturar: " + numMaletas20 + "\n\r"
+				+ "\t\t " + "Tipo de Coche de Alquiler: " + cocheTipo + "\n\r"
+				+ "\t\t " + "Precio Final: " + precioFinal + "\n\r"
+				;
+				
+		return toStringParaEmail;
+	}
+	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */

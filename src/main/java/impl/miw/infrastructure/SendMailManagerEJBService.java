@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.miw.business.BookManagerService;
 import com.miw.business.ViajeManagerService;
 import com.miw.infrastructure.SendMailManagerService;
+import com.miw.model.Billete;
 import com.miw.model.Book;
 import com.miw.model.ParamBusquedaViaje;
 import com.miw.model.Viaje;
@@ -20,10 +21,10 @@ public class SendMailManagerEJBService implements SendMailManagerService{
 
 	
 	@Override
-	public boolean sendMail(String to) {
-		return sendMailManager.sendMail(to);
+	public boolean sendMail(String to, Billete billete) {
+		return sendMailManager.sendMail(to, billete);
 	}
-	
-	
+
+
 	
 }

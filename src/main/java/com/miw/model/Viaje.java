@@ -3,7 +3,10 @@
  */
 package com.miw.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * @author Amir H. Tofigh Halati UO240753
@@ -14,7 +17,10 @@ public class Viaje {
 	private int viajeId;
 	private String origen;
 	private String destino;
+	
+	@DateTimeFormat(pattern = "dd-MM-yyyy HH:mm")
 	private Date f_salida;
+	
 	private int plazas_totales;
 	private int plazas_quedan;
 	private double precio;
@@ -161,7 +167,15 @@ public class Viaje {
 				+ plazas_quedan + ", precio=" + precio + "]";
 	}
 
-	
-	
+
+	public String toStringEmail() {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+		
+		return 
+				  "\t\t\t " + "Origen: " + origen + "\n\r"
+				+ "\t\t\t " + "Destino: " + destino + "\n\r"
+				+ "\t\t\t " + "Fecha de Salida: " + dateFormat.format(f_salida) + "\n\r"
+				;
+	}	
 
 }

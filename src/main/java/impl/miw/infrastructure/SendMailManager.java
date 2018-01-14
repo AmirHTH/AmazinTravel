@@ -3,6 +3,7 @@ package impl.miw.infrastructure;
 import java.util.Date;
 import java.util.Properties;
  
+
 import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.PasswordAuthentication;
@@ -10,6 +11,8 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+
+import com.miw.model.Billete;
 
 public class SendMailManager {
 	private static SendMailManager instance = null;
@@ -31,7 +34,7 @@ public class SendMailManager {
 	    return props;
 	}
 	 
-	public boolean sendMail(String to) {
+	public boolean sendMail(String to, Billete billete) {
 	    boolean result = false;
 	    props = System.getProperties();
 	    try {
@@ -67,8 +70,8 @@ public class SendMailManager {
 	 
 	        msg.setSentDate(new Date());
 	 
-	        msg.setSubject("Amazin");
-	        msg.setText("Amazin");
+	        msg.setSubject("Amazin Travels! Detalles de su reserva");
+	        msg.setText(generarCuerpoMensaje(billete));
 	 
 	        Transport.send(msg);
 	        result = true;
@@ -79,6 +82,17 @@ public class SendMailManager {
 	 
 	    return result;
 	    }
+	
+	private String generarCuerpoMensaje(Billete billete){
+		String cuerpoMensaje = "A continuación se muestran los detalles de su vuelo: \n\r";
+		
+			cuerpoMensaje += billete.toStringEmail();
+		
+			cuerpoMensaje += "\n\rPara cualquier aclaración pongase en contacto con Amazin Travels!";
+		
+		return cuerpoMensaje;
+		
+	}
 	 
 	    public boolean isDebug() {
 	    	return debug;

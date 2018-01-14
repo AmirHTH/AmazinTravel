@@ -1,7 +1,7 @@
 package com.miw.infrastructure;
 
-import impl.miw.infrastructure.SendMailManager;
+import com.miw.model.Billete;
 
 public interface SendMailManagerService {
-	public boolean sendMail(String to);
+	public boolean sendMail(String to, Billete billete);
 }

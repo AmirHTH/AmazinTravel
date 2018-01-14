@@ -35,7 +35,7 @@ public class SendMailController {
 	public String enviarCorreo(@ModelAttribute Billete billete, Model model, BindingResult result ) throws Exception
 	{			
 		//sendMailManagerService.getInstance();
-		sendMailManagerService.sendMail("amirht@gmail.com");	
+		sendMailManagerService.sendMail("amirht@gmail.com", billete);	
 			
 		return "private/showBilleteConfirmacion";
 	}
