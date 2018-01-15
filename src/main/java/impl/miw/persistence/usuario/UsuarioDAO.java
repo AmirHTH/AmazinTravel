@@ -40,9 +40,10 @@ public class UsuarioDAO implements UsuarioDataService {
 
 			try {
 				
-				ps = con.prepareStatement("select * from usuario where mail = ?");
+				ps = con.prepareStatement("select * from usuario where mail = (?)");
 				ps.setString(1, usuario.getMail());
 				rs = ps.executeQuery();
+				
 				
 				if (!rs.next() ) {
 				    usuario = null;

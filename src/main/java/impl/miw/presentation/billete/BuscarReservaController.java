@@ -33,7 +33,7 @@ import com.miw.model.Usuario;
 import com.miw.model.Viaje;
 
 @Controller
-@SessionAttributes({"billete", "usuario"})
+@SessionAttributes({"billete", "usuario", "reservaBuscada", "paramBuscarReserva"})
 public class BuscarReservaController {
 
 	@Autowired 
@@ -59,11 +59,14 @@ public class BuscarReservaController {
 
 	
 	@RequestMapping(value="private/buscarReserva", method = RequestMethod.POST)
-	public String buscarReserva(Billete billete, Usuario usuario, Model model, BindingResult result ) throws Exception
+	public String buscarReserva(ParamBuscarReserva paramBuscarReserva, Model model, BindingResult result ) throws Exception
 	{
-		billeteManagerService.
-		
-        	
+		Billete billete = billeteManagerService.getReserva(paramBuscarReserva);
+		model.addAttribute("reservaBuscada", billete);
+		model.addAttribute("paramBuscarReserva", paramBuscarReserva);
+		//Subimos al modelo los parámetros de búsqueda por si se nos ordena una cancelación
+		//model.addAttribute("paramBuscarReserva", paramBuscarReserva);
+     	
 		return "private/buscarReserva";
 	}	
 	

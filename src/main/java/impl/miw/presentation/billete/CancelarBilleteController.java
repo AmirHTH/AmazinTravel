@@ -14,6 +14,7 @@ import javax.validation.Valid;
 
 
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,12 +27,13 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.miw.business.BilleteManagerService;
 import com.miw.business.ViajeManagerService;
 import com.miw.model.Billete;
+import com.miw.model.ParamBuscarReserva;
 import com.miw.model.ParamBusquedaViaje;
 import com.miw.model.Usuario;
 import com.miw.model.Viaje;
 
 @Controller
-@SessionAttributes({"billete", "usuario"})
+@SessionAttributes({"billete", "usuario", "paramBuscarReserva"})
 public class CancelarBilleteController {
 
 	@Autowired 
@@ -47,20 +49,21 @@ public class CancelarBilleteController {
 		this.billeteManagerService = billeteManagerService;
 	}	
 	
-	
+	/*
 	@RequestMapping(value="private/cancelarReserva", method=RequestMethod.GET)
     public void facturar(){
 		System.out.println("----- GET CancelarReserva ------");
+		billeteManagerService.cancelarReserva(paramBuscarReserva);
     }
+	*/
 	
 
 	
-	@RequestMapping(value="private/cancelarReserva", method = RequestMethod.POST)
-	public String alquilarCoche(Billete billete, Usuario usuario, Model model, BindingResult result ) throws Exception
+	@RequestMapping(value="private/cancelarReserva", method = RequestMethod.GET)
+	public String cancelarReserva(ParamBuscarReserva paramBuscarReserva, Model model, BindingResult result ) throws Exception
 	{
-		billeteManagerService.cancelarReserva(billete, usuario);
-		
-        	
+		billeteManagerService.cancelarReserva(paramBuscarReserva);
+
 		return "private/cancelarReserva";
 	}	
 	

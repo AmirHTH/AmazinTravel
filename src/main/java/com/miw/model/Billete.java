@@ -17,7 +17,7 @@ public class Billete {
 	private int numMaletas20;
 	private String cocheTipo = COCHE_ALQUILER_NINGUNO; //Al crear un billete no habrá ningún tipo de coche seleccionado, lo seleccionará el usuario después.
 	private double precioFinal;
-	private String estado;
+	private String estado = ESTADO_SIN_CONFIRMAR;
 	private int billeteVueltaId;
 	
 	private boolean confirmado;

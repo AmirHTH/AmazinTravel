@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
@@ -21,9 +22,12 @@
 	<a href="seekAllViajes"><spring:message code="show.seekViajes"/>s</a>
 	<a href="seekViajes"><spring:message code="show.seekViajes"/>s</a>
 	
-	<a href="buscarReserva"><spring:message code="cancelarReserva"/></a>
+	<a href="buscarReserva"><spring:message code="reserva.cancelarReserva"/></a>
 	
-	<a href="cancelarReserva"><spring:message code="cancelarReserva"/></a>
+	<a href="cancelarReserva"><spring:message code="reserva.cancelarReserva"/></a>
+	
+	<p>Contador: <c:out value="${applicationScope.loginCounter.getLogins()}"></c:out></p>
+	<p>Contador: <c:out value="${applicationScope['loginCounter'].getLogins()}"></c:out></p>
 	
 	
 </body>

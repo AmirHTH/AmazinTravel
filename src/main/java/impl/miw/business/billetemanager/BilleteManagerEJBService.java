@@ -9,6 +9,7 @@ import com.miw.business.BookManagerService;
 import com.miw.business.ViajeManagerService;
 import com.miw.model.Billete;
 import com.miw.model.Book;
+import com.miw.model.ParamBuscarReserva;
 import com.miw.model.ParamBusquedaViaje;
 import com.miw.model.Usuario;
 import com.miw.model.Viaje;
@@ -45,8 +46,8 @@ private Integer times=0;
 	}
 	
 	@Override
-	public int cancelarReserva(Billete billete, Usuario usuario) throws Exception{
-		return billeteManager.cancelarReserva(billete, usuario);
+	public int cancelarReserva(ParamBuscarReserva paramBuscarReserva) throws Exception{
+		return billeteManager.cancelarReserva(paramBuscarReserva);
 	}
 
 	@Override
@@ -55,8 +56,8 @@ private Integer times=0;
 	}
 	
 	@Override
-	public Billete getReserva(Billete billete, Usuario usuario) throws Exception{
-		return billeteManager.getReserva(billete, usuario);
+	public Billete getReserva(ParamBuscarReserva paramBuscarReserva) throws Exception{
+		return billeteManager.getReserva(paramBuscarReserva);
 	}
 
 	/*

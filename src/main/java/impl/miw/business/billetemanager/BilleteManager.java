@@ -12,6 +12,7 @@ import com.miw.business.UsuarioManagerService;
 import com.miw.business.ViajeManagerService;
 import com.miw.model.Billete;
 import com.miw.model.Iva;
+import com.miw.model.ParamBuscarReserva;
 import com.miw.model.ParamBusquedaViaje;
 import com.miw.model.Usuario;
 import com.miw.model.Viaje;
@@ -143,14 +144,22 @@ public class BilleteManager implements BilleteManagerService {
 	}
 	
 
-	public Billete getReserva(Billete billete, Usuario usuario) throws Exception{
-		
+	public Billete getReserva(ParamBuscarReserva paramBuscarReserva) throws Exception{
+		Billete billete = new Billete();
+		billete.setBilleteId(paramBuscarReserva.getIdReserva());
+		/*
+		Usuario usuario = new Usuario();
+		usuario.setMail(paramBuscarReserva.getMail());
+		usuario = usuarioManagerService.getUsuario(usuario);
+		*/
 		//Me dan el codigo de la reserva
 		//Obtener datos reserva completa
 		billete = this.getBillete(billete);
 		
 		if(billete != null){
 			//ObtenerDatosUsuario
+			Usuario usuario = new Usuario();
+			usuario.setMail(paramBuscarReserva.getMail());
 			usuario = usuarioManagerService.getUsuario(usuario);
 		
 			if(usuario != null){
@@ -162,10 +171,10 @@ public class BilleteManager implements BilleteManagerService {
 		return null;
 	}
 	
-	public int cancelarReserva(Billete billete, Usuario usuario) throws Exception{
+	public int cancelarReserva(ParamBuscarReserva paramBuscarReserva) throws Exception{
 		int codigoResultadoOperacion = RESULTADO_PROCESO_NO_INICIADO;
 		//Comprobamos de nuevo que esa reserva existe para ese usuario
-		billete = this.getReserva(billete, usuario);
+		Billete billete = this.getReserva(paramBuscarReserva);
 		
 		if(billete == null){
 			return codigoResultadoOperacion = RESULTADO_RESERVA_NO_ENCONTRADA_PARA_ESE_USUARIO;
@@ -180,8 +189,8 @@ public class BilleteManager implements BilleteManagerService {
 			viajeVuelta.setViajeId(billete.getBilleteVueltaId());
 			viajeManagerService.agregarPlazas(viajeVuelta, billete.getPlazas());
 		}
-		
-		billeteDataService.cancelarReserva(billete);	
+		billeteDataService.cancelarReserva(billete);
+		billete = getBillete(billete);
 		
 		return codigoResultadoOperacion;
 
