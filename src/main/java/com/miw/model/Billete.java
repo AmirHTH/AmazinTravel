@@ -17,6 +17,7 @@ public class Billete {
 	private int numMaletas20;
 	private String cocheTipo = COCHE_ALQUILER_NINGUNO; //Al crear un billete no habrá ningún tipo de coche seleccionado, lo seleccionará el usuario después.
 	private double precioFinal;
+	private String estado;
 	private int billeteVueltaId;
 	
 	private boolean confirmado;
@@ -38,6 +39,10 @@ public class Billete {
 	public final static String COCHE_ALQUILER_NINGUNO = "Ninguno";
 	public final static String COCHE_ALQUILER_UTILITARIO = "Utilitario";
 	public final static String COCHE_ALQUILER_FURGONETA = "Furgoneta";
+	
+	public final static String ESTADO_CANCELADO = "Cancelado";
+	public final static String ESTADO_CONFIRMADO = "Confirmado";
+	public final static String ESTADO_SIN_CONFIRMAR = "Sin Confirmar";
 	
 	
 	
@@ -170,13 +175,17 @@ public class Billete {
 	}
 	
 	public boolean isConfirmado() {
-		return confirmado;
+		return getEstado().equals(Billete.ESTADO_CONFIRMADO);
 	}
 	
-	public void setConfirmado(boolean confirmado) {
-		this.confirmado = confirmado;
-	}
 	
+	
+	public String getEstado() {
+		return estado;
+	}
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
 	
 	@Override
 	public String toString() {

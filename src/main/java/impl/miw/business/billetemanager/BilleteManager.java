@@ -77,6 +77,7 @@ public class BilleteManager implements BilleteManagerService {
 			billete.setUsuarioId(usuarioEnSistema.getUsuarioId());
 			
 			//Una vez comprobado todo podemos crear el billete
+			billete.setEstado(Billete.ESTADO_CONFIRMADO);
 			billete = billeteDataService.crearBillete(billete);
 			//Y restamos el número de Plazas Libres en los vuelos
 			viajeManagerService.restarPlazas(billete.getViajeIda(), billete.getPlazas());
@@ -88,7 +89,7 @@ public class BilleteManager implements BilleteManagerService {
 			
 			if(billete != null){
 				codigoResultadoOperacion = RESULTADO_CORRECTO;
-				billete.setConfirmado(true);
+				billete.setEstado(Billete.ESTADO_SIN_CONFIRMAR);
 			}
 			
 		}else{
@@ -142,7 +143,7 @@ public class BilleteManager implements BilleteManagerService {
 	}
 	
 
-	public Billete getBilleteDeUsuario(Billete billete, Usuario usuario) throws Exception{
+	public Billete getReserva(Billete billete, Usuario usuario) throws Exception{
 		
 		//Me dan el codigo de la reserva
 		//Obtener datos reserva completa
@@ -164,7 +165,7 @@ public class BilleteManager implements BilleteManagerService {
 	public int cancelarReserva(Billete billete, Usuario usuario) throws Exception{
 		int codigoResultadoOperacion = RESULTADO_PROCESO_NO_INICIADO;
 		//Comprobamos de nuevo que esa reserva existe para ese usuario
-		billete = this.getBilleteDeUsuario(billete, usuario);
+		billete = this.getReserva(billete, usuario);
 		
 		if(billete == null){
 			return codigoResultadoOperacion = RESULTADO_RESERVA_NO_ENCONTRADA_PARA_ESE_USUARIO;
@@ -180,9 +181,7 @@ public class BilleteManager implements BilleteManagerService {
 			viajeManagerService.agregarPlazas(viajeVuelta, billete.getPlazas());
 		}
 		
-		
-		
-	
+		billeteDataService.cancelarReserva(billete);	
 		
 		return codigoResultadoOperacion;
 

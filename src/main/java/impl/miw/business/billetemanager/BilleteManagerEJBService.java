@@ -53,6 +53,11 @@ private Integer times=0;
 	public Billete getBillete(Billete billete) throws Exception {
 		return billeteManager.getBillete(billete);
 	}
+	
+	@Override
+	public Billete getReserva(Billete billete, Usuario usuario) throws Exception{
+		return billeteManager.getReserva(billete, usuario);
+	}
 
 	/*
 	@Override

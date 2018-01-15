@@ -21,7 +21,7 @@
 	
 	<p>Por favor, introduzca los datos de pago </p>
 	
-	<form:form action="cancelarResesrva" commandName="paramCancelarReserva">
+	<form:form action="buscarReserva" commandName="paramBuscarReserva">
 		<form:errors path=""/>
 		<br/>
 		

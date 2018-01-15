@@ -49,7 +49,7 @@ public class BilleteDAO implements BilleteDataService{
 					BILLETEVUELTAID INTEGER,
 					*/
 
-			ps = con.prepareStatement("insert into billete values (?,?,?,?,?,?,?,?,?)");
+			ps = con.prepareStatement("insert into billete values (?,?,?,?,?,?,?,?,?,?)");
 			ps.setInt(1, id+1);
 			ps.setInt(2, billete.getViajeId());
 			ps.setInt(3, billete.getUsuarioId());
@@ -58,7 +58,8 @@ public class BilleteDAO implements BilleteDataService{
 			ps.setInt(6, billete.getNumMaletas20());
 			ps.setString(7, billete.getCocheTipo());
 			ps.setDouble(8,  billete.getPrecioFinal());
-			ps.setInt(9, billete.getBilleteVueltaId());
+			ps.setString(9, billete.getEstado());
+			ps.setInt(10, billete.getBilleteVueltaId());
 			ps.executeUpdate();
 
 		} catch (Exception e) {
@@ -76,9 +77,30 @@ public class BilleteDAO implements BilleteDataService{
 	}
 
 	@Override
-	public int cancelarReserva(int codigoReserva, String email) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+	public Billete cancelarReserva(Billete billete) throws Exception {
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Connection con = conectarConBD();
+
+		try {				
+			ps = con.prepareStatement("update billete set ESTADO = ? where billeteid = ?");
+			ps.setString(1, Billete.ESTADO_CANCELADO); 
+			ps.setInt(2, billete.getBilleteId()); 
+			rs = ps.executeQuery();
+	
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw (e);
+		} finally {
+			try {
+				ps.close();
+				con.close();
+			} catch (Exception e) {
+			}
+		}
+		
+		return billete;
 	}
 	
 	@Override
@@ -106,6 +128,7 @@ public class BilleteDAO implements BilleteDataService{
 				billete.setNumMaletas20(rs.getInt("MALETAS20"));
 				billete.setCocheTipo(rs.getString("COCHE"));
 				billete.setPrecioFinal(rs.getDouble("PRECIOFINAL"));
+				billete.setEstado(rs.getString("ESTADO"));
 				billete.setBilleteVueltaId(rs.getInt("BILLETEVUELTAID"));
 				
 			}

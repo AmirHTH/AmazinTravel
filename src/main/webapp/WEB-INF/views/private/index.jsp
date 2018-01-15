@@ -21,6 +21,10 @@
 	<a href="seekAllViajes"><spring:message code="show.seekViajes"/>s</a>
 	<a href="seekViajes"><spring:message code="show.seekViajes"/>s</a>
 	
+	<a href="buscarReserva"><spring:message code="cancelarReserva"/></a>
+	
+	<a href="cancelarReserva"><spring:message code="cancelarReserva"/></a>
+	
 	
 </body>
 </html>
