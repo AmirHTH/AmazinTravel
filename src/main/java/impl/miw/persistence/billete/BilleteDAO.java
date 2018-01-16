@@ -86,7 +86,7 @@ public class BilleteDAO implements BilleteDataService{
 			ps = con.prepareStatement("update billete set ESTADO = ? where billeteid = ?");
 			ps.setString(1, Billete.ESTADO_CANCELADO); 
 			ps.setInt(2, billete.getBilleteId()); 
-			rs = ps.executeQuery();
+			ps.executeUpdate();
 	
 
 		} catch (Exception e) {

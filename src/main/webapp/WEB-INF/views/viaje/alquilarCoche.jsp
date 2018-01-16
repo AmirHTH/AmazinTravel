@@ -1,21 +1,7 @@
+<%@ include file='../templates/_header.jsp'%>
 
-
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-
-<html>
-<head>
-	<title>Amazin</title>
-</head>
-<body>
-	<center>
-		<h1><spring:message code="title"/></h1>
-		<br>
-		<h2><spring:message code="welcome"/></h2>
-	</center>
-	<br>
-	
+	<h3><spring:message code="buscarViaje.titulo"/></h3>
+	<p><spring:message code="buscarViaje.descripcionPagina"/></p>
 	
 	¿Qué coche desea alquilar?
 	
@@ -41,6 +27,6 @@
 		<c:out value="${message}"/>
 	</p>
 	
-</body>
-</html>
+<%@ include file='../templates/_footer.jsp'%>
+
 

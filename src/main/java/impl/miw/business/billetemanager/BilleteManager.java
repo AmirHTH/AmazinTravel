@@ -171,13 +171,12 @@ public class BilleteManager implements BilleteManagerService {
 		return null;
 	}
 	
-	public int cancelarReserva(ParamBuscarReserva paramBuscarReserva) throws Exception{
-		int codigoResultadoOperacion = RESULTADO_PROCESO_NO_INICIADO;
+	public Billete cancelarReserva(ParamBuscarReserva paramBuscarReserva) throws Exception{
 		//Comprobamos de nuevo que esa reserva existe para ese usuario
 		Billete billete = this.getReserva(paramBuscarReserva);
 		
 		if(billete == null){
-			return codigoResultadoOperacion = RESULTADO_RESERVA_NO_ENCONTRADA_PARA_ESE_USUARIO;
+			return null;
 		}
 		
 		Viaje viaje = new Viaje();
@@ -192,7 +191,7 @@ public class BilleteManager implements BilleteManagerService {
 		billeteDataService.cancelarReserva(billete);
 		billete = getBillete(billete);
 		
-		return codigoResultadoOperacion;
+		return billete;
 
 	}
 

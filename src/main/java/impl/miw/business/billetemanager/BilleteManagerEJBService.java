@@ -46,7 +46,7 @@ private Integer times=0;
 	}
 	
 	@Override
-	public int cancelarReserva(ParamBuscarReserva paramBuscarReserva) throws Exception{
+	public Billete cancelarReserva(ParamBuscarReserva paramBuscarReserva) throws Exception{
 		return billeteManager.cancelarReserva(paramBuscarReserva);
 	}
 

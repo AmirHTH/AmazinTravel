@@ -14,7 +14,7 @@ public interface BilleteManagerService {
 	public void agregarViajesABillete(Billete billete) throws Exception;
 	public int calcularPrecioFinal(Billete billete) throws Exception;
 	
-	public int cancelarReserva(ParamBuscarReserva paramBuscarReserva) throws Exception;
+	public Billete cancelarReserva(ParamBuscarReserva paramBuscarReserva) throws Exception;
 	
 	public Billete getReserva(ParamBuscarReserva paramBuscarReserva) throws Exception;
 	public Billete getBillete(Billete billete) throws Exception;

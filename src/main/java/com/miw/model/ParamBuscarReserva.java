@@ -2,21 +2,23 @@ package com.miw.model;
 
 
 
+import javax.validation.constraints.NotNull;
+
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.miw.model.validators.VueltaConstraint;
 
-@VueltaConstraint
+
 public class ParamBuscarReserva {
 	
-	@NotEmpty
-	private int idReserva;
+	@NotNull
+	private Integer idReserva;
 	
 	@NotEmpty
 	private String mail;
 
 	
-	public int getIdReserva() {
+	public Integer getIdReserva() {
 		return idReserva;
 	}
 

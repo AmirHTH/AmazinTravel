@@ -31,13 +31,12 @@ public class SendMailController {
 		this.sendMailManagerService = sendMailManagerService;
 	}
 	
-	@RequestMapping(value="private/enviarCorreo")
+	@RequestMapping(value="enviarCorreo")
 	public String enviarCorreo(@ModelAttribute Billete billete, Model model, BindingResult result ) throws Exception
 	{			
-		//sendMailManagerService.getInstance();
 		sendMailManagerService.sendMail("amirht@gmail.com", billete);	
 			
-		return "private/showBilleteConfirmacion";
+		return "reserva/mostrarConfirmacionReserva";
 	}
 	
 	

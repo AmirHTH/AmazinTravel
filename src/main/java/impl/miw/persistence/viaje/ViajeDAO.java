@@ -333,7 +333,7 @@ public class ViajeDAO implements ViajeDataService {
 			ps = con.prepareStatement("update viaje set PLAZAS_QUEDAN = ? where viajeid = ?");
 			ps.setInt(1, numeroPlazasQuedan-plazas); 
 			ps.setInt(2, viaje.getViajeId()); 
-			rs = ps.executeQuery();
+			ps.executeUpdate();
 	
 
 		} catch (Exception e) {
@@ -369,7 +369,7 @@ public class ViajeDAO implements ViajeDataService {
 			ps = con.prepareStatement("update viaje set PLAZAS_QUEDAN = ? where viajeid = ?");
 			ps.setInt(1, numeroPlazasQuedan+plazas); 
 			ps.setInt(2, viaje.getViajeId()); 
-			rs = ps.executeQuery();
+			ps.executeUpdate();
 	
 
 		} catch (Exception e) {

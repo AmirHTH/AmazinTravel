@@ -1,4 +1,4 @@
-package impl.miw.presentation.billete;
+package impl.miw.presentation.reserva;
 
 import impl.miw.business.billetemanager.BilleteManager;
 
@@ -34,7 +34,7 @@ import com.miw.model.Viaje;
 
 @Controller
 @SessionAttributes({"billete", "usuario", "paramBuscarReserva"})
-public class CancelarBilleteController {
+public class CancelarReservaController {
 
 	@Autowired 
 	BilleteManagerService billeteManagerService;
@@ -59,12 +59,13 @@ public class CancelarBilleteController {
 	
 
 	
-	@RequestMapping(value="private/cancelarReserva", method = RequestMethod.GET)
+	@RequestMapping(value="cancelarReserva", method = RequestMethod.GET)
 	public String cancelarReserva(ParamBuscarReserva paramBuscarReserva, Model model, BindingResult result ) throws Exception
 	{
-		billeteManagerService.cancelarReserva(paramBuscarReserva);
+		Billete billete = billeteManagerService.cancelarReserva(paramBuscarReserva);
+		model.addAttribute("reservaBuscada", billete);
 
-		return "private/cancelarReserva";
+		return "reserva/cancelarReserva";
 	}	
 	
 }

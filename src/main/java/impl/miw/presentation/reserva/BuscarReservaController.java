@@ -1,10 +1,11 @@
-package impl.miw.presentation.billete;
+package impl.miw.presentation.reserva;
 
 import impl.miw.business.billetemanager.BilleteManager;
 
 import java.util.Vector;
 
 import javax.validation.Valid;
+
 
 
 
@@ -50,24 +51,32 @@ public class BuscarReservaController {
 	}	
 	
 	
-	@RequestMapping(value="private/buscarReserva", method=RequestMethod.GET)
-    public void buscarReserva(Model model){
+	@RequestMapping(value="buscarReserva", method=RequestMethod.GET)
+    public String buscarReserva(Model model){
 		System.out.println("----- GET BuscarReserva ------");
 		model.addAttribute("paramBuscarReserva", new ParamBuscarReserva());
+		return "reserva/buscarReserva";
     }
 	
 
 	
-	@RequestMapping(value="private/buscarReserva", method = RequestMethod.POST)
-	public String buscarReserva(ParamBuscarReserva paramBuscarReserva, Model model, BindingResult result ) throws Exception
+	@RequestMapping(value="buscarReserva", method = RequestMethod.POST)
+	public String buscarReserva(@Valid @ModelAttribute ParamBuscarReserva paramBuscarReserva, Model model, BindingResult result ) throws Exception
 	{
-		Billete billete = billeteManagerService.getReserva(paramBuscarReserva);
-		model.addAttribute("reservaBuscada", billete);
-		model.addAttribute("paramBuscarReserva", paramBuscarReserva);
-		//Subimos al modelo los parámetros de búsqueda por si se nos ordena una cancelación
-		//model.addAttribute("paramBuscarReserva", paramBuscarReserva);
-     	
-		return "private/buscarReserva";
+		if ( result.hasErrors())
+		{
+			System.out.println("---- Has Errors -----");
+			return "reserva/buscarReserva";
+			
+		}else{
+			Billete billete = billeteManagerService.getReserva(paramBuscarReserva);
+			model.addAttribute("reservaBuscada", billete);
+			model.addAttribute("paramBuscarReserva", paramBuscarReserva);
+			//Subimos al modelo los parámetros de búsqueda por si se nos ordena una cancelación
+			//model.addAttribute("paramBuscarReserva", paramBuscarReserva);
+	     	
+			return "reserva/buscarReserva";
+		}
 	}	
 	
 }

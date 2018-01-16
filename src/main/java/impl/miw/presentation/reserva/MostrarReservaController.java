@@ -1,4 +1,4 @@
-package impl.miw.presentation.billete;
+package impl.miw.presentation.reserva;
 
 import java.util.Vector;
 
@@ -26,7 +26,7 @@ import com.miw.model.Usuario;
 
 @Controller
 @SessionAttributes("billete")
-public class ShowBilleteController {
+public class MostrarReservaController {
 
 	@Autowired 
 	BilleteManagerService billeteManagerService;
@@ -48,29 +48,14 @@ public class ShowBilleteController {
 		return new ParamBusquedaViaje();
 	}
 	
-	@RequestMapping("private/showBillete")
+	@RequestMapping("mostrarReserva")
 	public String showBillete(Model model) throws Exception {
 		System.out.println("Ejecutado ShowBillete.");
 
 		// Colocamos la lista de libros en el modelo.
 		//model.addAttribute("viajesList", viajeManagerService.getViajes());
 		// Levantamos el evento success para especificar que todo ha ido bien
-		return "private/showBillete";	
-	}
-	
-	@RequestMapping("private/showBilleteConfirmacion")
-	public String showBilleteConfirmacion(Model model) throws Exception {
-		System.out.println("Ejecutado ShowBilleteConfirmacion.");
-		
-		//new ParamBusquedaViaje();
-		System.out.println("----- POST Billete Confirmación------");
-		//System.out.println("Billete: " + billete.toString());
-		//System.out.println("Usuario: " + usuario.toString());
-		
-		
-		model.addAttribute("estaConfirmado", "Confirmado");
-		
-		return "private/showBilleteConfirmacion";	
+		return "reserva/mostrarReserva";	
 	}
 	
 }

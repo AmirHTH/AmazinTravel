@@ -1,4 +1,4 @@
-package impl.miw.presentation.billete;
+package impl.miw.presentation.viaje;
 
 import impl.miw.business.billetemanager.BilleteManager;
 
@@ -31,7 +31,7 @@ import com.miw.model.Viaje;
 
 @Controller
 @SessionAttributes({"billete", "usuario"})
-public class BilleteController {
+public class AgregarMaletasFacturadasController {
 
 	@Autowired 
 	BilleteManagerService billeteManagerService;
@@ -46,32 +46,16 @@ public class BilleteController {
 		this.billeteManagerService = billeteManagerService;
 	}
 	
-	/*
-	public ViajeManagerService getViajeManagerService() {
-		return viajeManagerService;
-	}
-
-
-	public void setViajeManagerService(ViajeManagerService viajeManagerService) {
-		this.viajeManagerService = viajeManagerService;
-	}
-	*/
-	
-	
-	/*
-	@RequestMapping(value="private/facturar", method = RequestMethod.GET)
-	public void get()
-	{
-		System.out.println("----- GET ------");
-	}*/
 	
 	
 	
-	@RequestMapping(value="/facturar", method=RequestMethod.GET)
-    public void facturar(){
-		System.out.println("----- GET Facturar ------");
+	
+	@RequestMapping(value="facturar", method=RequestMethod.GET)
+    public String facturar(){
+		return "viaje/facturar";
     }
 	
+	/*
 	@RequestMapping(value="private/alquilarCoche", method=RequestMethod.GET)
     public void alquilarCoche(){
 		System.out.println("----- GET Facturar ------");
@@ -99,8 +83,8 @@ public class BilleteController {
 		return "private/showBillete";
 	}
 
-	
-	@RequestMapping(value="private/facturar", method = RequestMethod.POST)
+	*/
+	@RequestMapping(value="facturar", method = RequestMethod.POST)
 	public String facturar(@ModelAttribute Billete billete, Model model, BindingResult result ) throws Exception
 	{
 			//new ParamBusquedaViaje();
@@ -112,9 +96,10 @@ public class BilleteController {
 			
 			model.addAttribute("billete", billete);
         	
-		return "private/showBillete";
+		return "viaje/mostrarDetallesViaje";
 	}
 	
+	/*
 	@RequestMapping(value="private/pagarBillete", method = RequestMethod.POST)
 	public String pagarBillete(@Valid @ModelAttribute Usuario usuario, BindingResult result, Model model) throws Exception
 	{
@@ -132,20 +117,21 @@ public class BilleteController {
 		return "private/showBilleteConfirmacion";
 		}
 	}
-
+*/
 	
-	@RequestMapping(value="private/processForm", params="facturar",  method = RequestMethod.POST)
+	@RequestMapping(value="processForm", params="facturar",  method = RequestMethod.POST)
 	public String procesarFormularioBusquedaFacturar(@ModelAttribute Billete billete, Model model, BindingResult result ) throws Exception
 	{			
 	
-
 		billeteManagerService.agregarViajesABillete(billete);
 		billeteManagerService.calcularPrecioFinal(billete);
-			model.addAttribute("billete", billete);
+		model.addAttribute("billete", billete);
 			
-		return "private/facturar";
+		return "viaje/facturar";
 	}
 	
+	
+	/*
 	@RequestMapping(value="private/processForm", params="alquilarCoche",  method = RequestMethod.POST)
 	public String procesarFormularioBusquedaAlquilar(@ModelAttribute Billete billete, Model model, BindingResult result ) throws Exception
 	{
@@ -177,6 +163,7 @@ public class BilleteController {
 			
 		return "private/showBillete";
 	}
+	*/
 	
 	
 	/*
@@ -194,7 +181,7 @@ public class BilleteController {
 		return new Usuario();
 	}*/
 	
-	
+	/*
 	@RequestMapping("private/procesarBillete")
 	public String procesarBillete(Usuario usuario, Billete billete, Model model  )
 	{
@@ -227,7 +214,7 @@ public class BilleteController {
 		
 		return "private/showBilleteConfirmacion";
 	}
-	
+	*/
 	
 	
 }

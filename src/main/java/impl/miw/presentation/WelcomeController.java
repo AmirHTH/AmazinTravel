@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.context.ServletContextAware;
 
+import com.miw.model.ParamBusquedaViaje;
+
 
 @Controller
 public class WelcomeController implements ServletContextAware{
@@ -24,17 +26,26 @@ public class WelcomeController implements ServletContextAware{
 	        this.servletContext = servletContext;
 	 }
 	 
-	 
-	 
 
 	/*
 	 * Setting / as request mapping url we are setting the default controller
 	 * for the application.
-	 */
+	 *//*
 	@RequestMapping("/")
 	public String welcome(Model m) {
 		System.out.println("Ejecutando controlador Welcome");
 		return "redirect:/private/menu";
+	}*/
+	 
+	 /*
+		 * Setting / as request mapping url we are setting the default controller
+		 * for the application.
+		 */
+	@RequestMapping("/")
+	public String welcome(@ModelAttribute ParamBusquedaViaje param, Model model) {
+		incrementarContador();
+		
+		return "index";
 	}
 	
 	@RequestMapping("/private/menu")
@@ -68,4 +79,5 @@ public class WelcomeController implements ServletContextAware{
 		loginCounter.inc();
 		servletContext.setAttribute("loginCounter", loginCounter);
 	}
+
 }
