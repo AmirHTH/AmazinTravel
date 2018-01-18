@@ -1,7 +1,6 @@
 package com.miw.model;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+
 import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;

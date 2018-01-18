@@ -3,27 +3,41 @@
  */
 package com.miw.model;
 
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
 /**
  * @author Amir H. Tofigh Halati UO240753
  *
  */
 public class DatosCobro {
-	private int usuarioId;
+	@NotNull
+	private Integer usuarioId;
+	
+	@NotEmpty
 	private String nombre;
+	
+	@NotEmpty
 	private String apellidos;
+	
+	@NotEmpty
 	private String dni;
+	
+	@NotEmpty
 	private String mail;
+	
 	
 	/**
 	 * @return the usuarioId
 	 */
-	public int getUsuarioId() {
+	public Integer getUsuarioId() {
 		return usuarioId;
 	}
 	/**
 	 * @param usuarioId the usuarioId to set
 	 */
-	public void setUsuarioId(int usuarioId) {
+	public void setUsuarioId(Integer usuarioId) {
 		this.usuarioId = usuarioId;
 	}
 	/**

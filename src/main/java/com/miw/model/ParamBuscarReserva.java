@@ -3,10 +3,7 @@ package com.miw.model;
 
 
 import javax.validation.constraints.NotNull;
-
 import org.hibernate.validator.constraints.NotEmpty;
-
-import com.miw.model.validators.VueltaConstraint;
 
 
 public class ParamBuscarReserva {
@@ -33,8 +30,6 @@ public class ParamBuscarReserva {
 	public void setMail(String mail) {
 		this.mail = mail;
 	}
-	
-	
 	
 
 }

@@ -1,23 +1,7 @@
 package impl.miw.presentation.reserva;
 
-import impl.miw.business.billetemanager.BilleteManager;
-
-import java.util.Vector;
 
 import javax.validation.Valid;
-
-
-
-
-
-
-
-
-
-
-
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,16 +10,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.bind.support.SessionAttributeStore;
-import org.springframework.web.context.request.WebRequest;
-
 import com.miw.business.BilleteManagerService;
-import com.miw.business.ViajeManagerService;
 import com.miw.model.Billete;
 import com.miw.model.ParamBuscarReserva;
-import com.miw.model.ParamBusquedaViaje;
-import com.miw.model.Usuario;
-import com.miw.model.Viaje;
+
 
 @Controller
 @SessionAttributes({/*"billete", */"usuario", /* "reservaBuscada", */ "paramBuscarReserva"})

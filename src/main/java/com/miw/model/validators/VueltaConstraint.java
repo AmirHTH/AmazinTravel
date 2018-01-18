@@ -12,11 +12,6 @@ import javax.validation.Payload;
 @Target( { ElementType.TYPE})
 @Constraint(validatedBy = VueltaValidator.class)
 public @interface VueltaConstraint {
-	/*
-
-@Target( { ElementType.METHOD, ElementType.FIELD })
-@Retention(RetentionPolicy.RUNTIME)
-*/
 	
 	 String message() default "Si el viaje es de ida y vuelta debe seleccionar una fecha de vuelta.";
 	 Class<?>[] groups() default {};

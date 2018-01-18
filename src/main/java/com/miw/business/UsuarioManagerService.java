@@ -1,10 +1,8 @@
 package com.miw.business;
 
-import java.util.Vector;
 
-import com.miw.model.ParamBusquedaViaje;
 import com.miw.model.Usuario;
-import com.miw.model.Viaje;
+
 
 public interface UsuarioManagerService {
 	
