@@ -20,7 +20,7 @@ public class Billete {
 	private String estado = ESTADO_SIN_CONFIRMAR;
 	private int billeteVueltaId;
 	
-	private boolean confirmado;
+	private boolean confirmado=false;
 	
 	private Viaje viajeIda;
 	private Viaje viajeVuelta;

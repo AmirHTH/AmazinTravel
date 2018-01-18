@@ -38,7 +38,7 @@ import com.miw.model.Usuario;
 import com.miw.model.Viaje;
 
 @Controller
-@SessionAttributes({"billete", "usuario", /* "reservaBuscada", */ "paramBuscarReserva"})
+@SessionAttributes({/*"billete", */"usuario", /* "reservaBuscada", */ "paramBuscarReserva"})
 public class BuscarReservaController {
 
 	@Autowired 
@@ -75,7 +75,7 @@ public class BuscarReservaController {
 			
 		}else{
 			Billete billete = billeteManagerService.getReserva(paramBuscarReserva);
-			model.addAttribute("reservaBuscada", billete);
+			model.addAttribute("billete", billete);
 			model.addAttribute("paramBuscarReserva", paramBuscarReserva);
 			//Subimos al modelo los parámetros de búsqueda por si se nos ordena una cancelación
 			//model.addAttribute("paramBuscarReserva", paramBuscarReserva);

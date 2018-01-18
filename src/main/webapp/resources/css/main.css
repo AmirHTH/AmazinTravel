@@ -80,3 +80,7 @@ th{
 .cell{
   padding: 6px 12px;
 }
+
+.bold{
+	font-weight: bold;
+}
