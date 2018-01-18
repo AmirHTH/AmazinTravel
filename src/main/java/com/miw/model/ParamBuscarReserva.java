@@ -22,7 +22,7 @@ public class ParamBuscarReserva {
 		return idReserva;
 	}
 
-	public void setIdReserva(int codigoReserva) {
+	public void setIdReserva(Integer codigoReserva) {
 		this.idReserva = codigoReserva;
 	}
 

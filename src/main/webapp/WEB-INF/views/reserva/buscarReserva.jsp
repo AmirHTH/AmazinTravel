@@ -29,10 +29,15 @@
 		<p>Tipo de coche de alquiler: <c:out value="${reservaBuscada.cocheTipo}"></c:out></p>
 		<p>Precio Final: <c:out value="${reservaBuscada.precioFinal}"></c:out></p>
 		<p>Billete de Vuelta Id:<c:out value="${reservaBuscada.billeteVueltaId}"></c:out></p>
-			<p>Estado:<c:out value="${reservaBuscada.estado}"></c:out></p>
+		<p>Estado:<c:out value="${reservaBuscada.estado}"></c:out></p>
+			
+		<c:if test="${reservaBuscada.estado = 'Confirmado'}" >
+			<a href="cancelarReserva"><spring:message code="reserva.cancelarReserva"/>s</a>
+		</c:if>
+			
 	</c:if>
 		
-	<a href="cancelarReserva"><spring:message code="reserva.cancelarReserva"/>s</a>
+	
 	
 	<!-- En caso de que hubiese algún mensaje de error, lo mostramos -->
 	<p style="color: red;">

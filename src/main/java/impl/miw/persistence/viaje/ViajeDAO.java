@@ -118,7 +118,7 @@ public class ViajeDAO implements ViajeDataService {
 
 		try {
 			
-			ps = con.prepareStatement("select * from viaje where origen = ? and destino = ? and plazas_quedan >= ? and cast(f_salida as date) = ? ");
+			ps = con.prepareStatement("select * from viaje where origen = ? and destino = ? and plazas_quedan >= ? and cast(f_salida as date) = ? order by f_salida");
 			ps.setString(1, params.getOrigen());
 			ps.setString(2, params.getDestino());
 			ps.setInt(3,  params.getPlazas());
@@ -164,7 +164,7 @@ public class ViajeDAO implements ViajeDataService {
 
 		try {
 			
-			ps = con.prepareStatement("select * from viaje where origen = ? and destino = ? and plazas_quedan >= ? and cast(f_salida as date) = ?");
+			ps = con.prepareStatement("select * from viaje where origen = ? and destino = ? and plazas_quedan >= ? and cast(f_salida as date) = ? order by f_salida");
 			ps.setString(1, params.getDestino()); //Si lo quiere Ida y Vuelta, en la Vuelta, el sitio de Destino será donde se inicie el vuelo
 			ps.setString(2, params.getOrigen());
 			ps.setInt(3,  params.getPlazas());

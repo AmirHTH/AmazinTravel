@@ -5,7 +5,7 @@
 <html>
 <head>
  	<link href="<c:url value="/resources/css/main.css" />" rel="stylesheet">
-	<title>Amazin Travels!</title>
+	<title><spring:message code="title"/></title>
 </head>
 <body>
 	<header>

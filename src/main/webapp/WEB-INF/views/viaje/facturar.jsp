@@ -1,31 +1,43 @@
 <%@ include file='../templates/_header.jsp'%>
 
-	<h3><spring:message code="buscarViaje.titulo"/></h3>
-	<p><spring:message code="buscarViaje.descripcionPagina"/></p>
+	<h3><spring:message code="facturar.h3.titulo"/></h3>
+	<p><spring:message code="facturar.h3.descripcionPagina"/></p>
 	
-	
+
 	<form:form action="facturar" commandName="billete">
-		<form:errors path=""/>
-		<br/>
+		<spring:hasBindErrors name="billete">
+			<section id="errors">
+				<ul>
+					<c:forEach var="error" items="${errors.allErrors}">
+						<li><spring:message message="${error}" /></li>
+					</c:forEach>
+				</ul>
+			</section>
+    	</spring:hasBindErrors>
 		
 		<p>
-		Maletas normales (15 kg.)
-		<form:select path="numMaletas15">		
-			<c:forEach begin="0" end="20" var="i">
-			    <option value="${i}">${i}</option>
-			</c:forEach>
-		</form:select>
+			<form:label path="numMaletas15"><spring:message code="facturar.tipo.normal"/></form:label>
+			<form:select path="numMaletas15">		
+				<c:forEach begin="0" end="20" var="i">
+				    <option value="${i}">${i}</option>
+				</c:forEach>
+			</form:select>
+			<spring:message code="facturar.tipo.maletas"/>
 		</p>
 		
 		<p>
-			Maletas normales (20 kg.)
+			<form:label path="numMaletas20"><spring:message code="facturar.tipo.grande"/></form:label>
 			<form:select path="numMaletas20">		
 				<c:forEach begin="0" end="20" var="i">
 				    <option value="${i}">${i}</option>
 				</c:forEach>
 			</form:select>
+			<spring:message code="facturar.tipo.maletas"/>
 		</p>
-		<input type="submit" value="Seleccionar"/>
+		
+		<spring:message code="seleccionar" var="seleccionar"/>
+		<input type="submit" value="${seleccionar}"/>
+		
 	</form:form>
 		
 	

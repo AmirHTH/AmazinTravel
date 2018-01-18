@@ -1,9 +1,8 @@
 <%@ include file='../templates/_header.jsp'%>
 
-	<h3><spring:message code="buscarViaje.titulo"/></h3>
-	<p><spring:message code="buscarViaje.descripcionPagina"/></p>
+	<h3><spring:message code="alquilar.h3.titulo"/></h3>
+	<p><spring:message code="alquilar.h3.descripcionPagina"/></p>
 	
-	¿Qué coche desea alquilar?
 	
 	<form:form action="alquilarCoche" commandName="billete">
 		<form:errors path=""/>
@@ -11,13 +10,14 @@
 		
 		<p>
 		<form:select path="cocheTipo">		
-			<option value="Ninguno">Ninguno</option>
-			<option value="Utilitario">Utilitario</option>
-			<option value="Furgoneta">Furgoneta</option>
+			<option value="Ninguno"><spring:message code="alquilar.ninguno"/></option>
+			<option value="Utilitario"><spring:message code="alquilar.utilitario"/></option>
+			<option value="Furgoneta"><spring:message code="alquilar.furgoneta"/></option>
 		</form:select>
 		</p>
 
-		<input type="submit" value="Seleccionar"/>
+		<spring:message code="seleccionar" var="seleccionar"/>
+		<input type="submit" value="${seleccionar}"/>
 	</form:form>
 		
 
