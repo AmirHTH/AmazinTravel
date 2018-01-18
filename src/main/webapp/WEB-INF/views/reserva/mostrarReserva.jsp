@@ -11,20 +11,11 @@
 	<p>Tipo de coche de alquiler: <c:out value="${billete.cocheTipo}"></c:out></p>
 	<p>Precio Final: <c:out value="${billete.precioFinal}"></c:out></p>
 	<p>Billete de Vuelta Id:<c:out value="${billete.billeteVueltaId}"></c:out></p>
-	<p>Estado:<c:out value="${reservaBuscada.estado}"></c:out></p>
+	<p>Estado:<c:out value="${billete.estado}"></c:out></p>
 	
-	<c:choose>
-		<c:when  test = "${estaConfirmado == 'Confirmado'}">
-			<input type="button" value="Print this page" onClick="window.print()">
-		</c:when>
-		<c:otherwise>
-			<p>
-				<a href="facturar">Facturar Maletas</a>
-				<a href="alquilarCoche">Contratar coche de alquiler</a>
-				<a href="pagarBillete">Confirmar Billete</a>
-			</p>
-		</c:otherwise>
-	</c:choose>
+	<c:if test = "${estaConfirmado == 'Confirmado'}">
+		<input type="button" value="Print this page" onClick="window.print()">
+	</c:if>
 	
 
 <%@ include file='../templates/_footer.jsp'%>

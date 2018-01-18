@@ -17,8 +17,7 @@
 	<nav>
 		<ul>
 			<li><a href="<c:url value="/"/>"><spring:message code="header.buscarViaje"/></a></li>
-			<li><a href="buscarReserva"><spring:message code="header.buscarReserva"/></a></li>
-			<li><a href="cancelarReserva"><spring:message code="header.cancelarReserva"/></a></li>
+			<li><a href="buscarReserva"><spring:message code="header.cancelarReserva"/></a></li>
 		</ul>
 	</nav>
 	

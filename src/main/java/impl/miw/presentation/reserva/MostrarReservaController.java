@@ -50,11 +50,8 @@ public class MostrarReservaController {
 	
 	@RequestMapping("mostrarReserva")
 	public String showBillete(Model model) throws Exception {
-		System.out.println("Ejecutado ShowBillete.");
+		
 
-		// Colocamos la lista de libros en el modelo.
-		//model.addAttribute("viajesList", viajeManagerService.getViajes());
-		// Levantamos el evento success para especificar que todo ha ido bien
 		return "reserva/mostrarReserva";	
 	}
 	

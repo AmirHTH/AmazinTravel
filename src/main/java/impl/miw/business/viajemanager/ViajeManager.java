@@ -8,10 +8,8 @@ import java.util.Vector;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.miw.business.ViajeManagerService;
-import com.miw.model.Iva;
 import com.miw.model.ParamBusquedaViaje;
 import com.miw.model.Viaje;
-import com.miw.persistence.IvaDataService;
 import com.miw.persistence.ViajeDataService;
 
 public class ViajeManager implements ViajeManagerService {
@@ -19,25 +17,15 @@ public class ViajeManager implements ViajeManagerService {
 	@Autowired
 	private ViajeDataService viajeDataService;
 	
-	@Autowired
-	private IvaDataService ivaDataService;
 	
 	//private Map<Integer,Integer> disccounts;
 	
 	
-/*
-	public void setDisccounts(Map<Integer,Integer> disccounts) {
-		System.out.println("Recibidos los descuentos por familia: "+disccounts);
-		this.disccounts = disccounts;
-	}
-*/
+
 	public void setViajeDataService(ViajeDataService viajeDataService) {
 		this.viajeDataService = viajeDataService;
 	}
 
-	public void setIvaDataService(IvaDataService ivaDataService) {
-		this.ivaDataService = ivaDataService;
-	}
 
 	public Vector<Viaje> getViajes() throws Exception
 	{
@@ -98,27 +86,5 @@ public class ViajeManager implements ViajeManagerService {
 		return viajeDataService.agregarPlazas(viaje, plazas);
 	}
 	
-	
-	
-	
-	
-	
-	
-	/*
-	@Override
-	public Book getSpecialOffer() throws Exception
-	{
-		Vector<Book> books = getBooks();
-		int number = (int) (Math.random()*books.size()-1);
-		System.out.println("Aplicando descuento a "+books.elementAt(number).getTitle());
-		books.elementAt(number).setPrice((double)books.elementAt(number).getPrice()*0.9);
-		return books.elementAt(number);
-	}
-
-	public Book newBook(Book book) throws Exception {
-		// TODO Auto-generated method stub
-		return this.bookDataService.newBook(book);
-	}
-	*/
 	
 }

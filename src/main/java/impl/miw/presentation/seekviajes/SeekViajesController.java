@@ -4,7 +4,6 @@ import java.util.Vector;
 
 import javax.validation.Valid;
 
-import impl.miw.presentation.shopingcart.ShoppingCart;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,8 +18,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.miw.business.BilleteManagerService;
 import com.miw.business.ViajeManagerService;
 import com.miw.model.Billete;
-import com.miw.model.ParamBusquedaViaje;
-import com.miw.model.Order;
 import com.miw.model.ParamBusquedaViaje;
 import com.miw.model.Viaje;
 

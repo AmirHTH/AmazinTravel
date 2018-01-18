@@ -5,10 +5,8 @@ import java.util.Vector;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.miw.business.BilleteManagerService;
-import com.miw.business.BookManagerService;
 import com.miw.business.ViajeManagerService;
 import com.miw.model.Billete;
-import com.miw.model.Book;
 import com.miw.model.ParamBuscarReserva;
 import com.miw.model.ParamBusquedaViaje;
 import com.miw.model.Usuario;
@@ -59,6 +57,12 @@ private Integer times=0;
 	public Billete getReserva(ParamBuscarReserva paramBuscarReserva) throws Exception{
 		return billeteManager.getReserva(paramBuscarReserva);
 	}
+	
+	@Override
+	public Vector<Billete> getBilletesUsuario(Usuario usuario) throws Exception{
+		return billeteManager.getBilletesUsuario(usuario);
+	}
+
 
 	/*
 	@Override

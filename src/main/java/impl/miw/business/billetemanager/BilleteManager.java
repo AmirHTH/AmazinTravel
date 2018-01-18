@@ -11,14 +11,11 @@ import com.miw.business.BilleteManagerService;
 import com.miw.business.UsuarioManagerService;
 import com.miw.business.ViajeManagerService;
 import com.miw.model.Billete;
-import com.miw.model.Iva;
 import com.miw.model.ParamBuscarReserva;
 import com.miw.model.ParamBusquedaViaje;
 import com.miw.model.Usuario;
 import com.miw.model.Viaje;
 import com.miw.persistence.BilleteDataService;
-import com.miw.persistence.BookDataService;
-import com.miw.persistence.IvaDataService;
 import com.miw.persistence.UsuarioDataService;
 import com.miw.persistence.ViajeDataService;
 
@@ -193,6 +190,23 @@ public class BilleteManager implements BilleteManagerService {
 		
 		return billete;
 
+	}
+	
+	@Override
+	public Vector<Billete> getBilletesUsuario(Usuario usuario) throws Exception{
+		Vector<Billete> billetes = billeteDataService.getBilletesUsuario(usuario);
+		for ( Billete billete: billetes){
+			Viaje viajeIda = new Viaje();
+			viajeIda.setViajeId(billete.getViajeId());
+			billete.setViajeIda(viajeManagerService.getViaje(viajeIda));
+			
+			if(billete.getTipo().equals(Billete.VUELTA)){
+				Viaje viajeVuelta = new Viaje();
+				viajeVuelta.setViajeId(billete.getBilleteVueltaId());
+				billete.setViajeVuelta(viajeManagerService.getViaje(viajeVuelta));
+			}
+		}
+		return billetes;
 	}
 
 	

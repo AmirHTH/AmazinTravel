@@ -23,12 +23,11 @@
 	<bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
 		<property name="mappings">
 			<props>
-				<prop key="/seekBooksOldWay">seekBooksOldWay</prop>
+				
 			</props>
 		</property>
 	</bean>
 
-	<bean id="seekBooksOldWay"
-		class="impl.miw.presentation.seekbooks.SeekBooksOldFashionController" />
+	
 
 </beans>

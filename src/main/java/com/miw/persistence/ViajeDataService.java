@@ -5,8 +5,6 @@ package com.miw.persistence;
 
 import java.util.ArrayList;
 import java.util.Vector;
-
-import com.miw.model.Book;
 import com.miw.model.ParamBusquedaViaje;
 import com.miw.model.Viaje;
 

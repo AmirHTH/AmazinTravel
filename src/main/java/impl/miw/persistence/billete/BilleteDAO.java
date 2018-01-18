@@ -4,8 +4,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Vector;
 
 import com.miw.model.Billete;
+import com.miw.model.Usuario;
+import com.miw.model.Viaje;
 import com.miw.persistence.BilleteDataService;
 
 public class BilleteDAO implements BilleteDataService{
@@ -146,6 +149,54 @@ public class BilleteDAO implements BilleteDataService{
 		// Retornamos el vector de resultado.
 		return billete;
 	}
+	
+	
+	@Override
+	public Vector<Billete> getBilletesUsuario(Usuario usuario) throws Exception {
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Connection con = conectarConBD();
+		
+		Vector<Billete> resultado = new Vector<Billete>();
+
+
+		try {	
+			ps = con.prepareStatement("select * from billete where usuarioid = ?");
+			ps.setInt(1, usuario.getUsuarioId()); //Si lo quiere Ida y Vuelta, en la Vuelta, el sitio de Destino será donde se inicie el vuelo
+			rs = ps.executeQuery();
+			
+			
+
+			while (rs.next()) {
+				// Completamos los datos del billete en la entidad
+				Billete billete = new Billete();
+				billete.setViajeId(rs.getInt("Billeteid"));
+				billete.setViajeId(rs.getInt("VIAJEID"));
+				billete.setUsuarioId(rs.getInt("USUARIOID"));
+				billete.setPlazas(rs.getInt("PLAZAS_COMPRADAS"));
+				billete.setNumMaletas15(rs.getInt("MALETAS15"));
+				billete.setNumMaletas20(rs.getInt("MALETAS20"));
+				billete.setCocheTipo(rs.getString("COCHE"));
+				billete.setPrecioFinal(rs.getDouble("PRECIOFINAL"));
+				billete.setEstado(rs.getString("ESTADO"));
+				billete.setBilleteVueltaId(rs.getInt("BILLETEVUELTAID"));
+				resultado.add(billete);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw (e);
+		} finally {
+			try {
+				ps.close();
+				con.close();
+			} catch (Exception e) {
+			}
+		}
+		// Retornamos el vector de resultado.
+		return resultado;
+	}
+	
 	
 	private Connection conectarConBD(){
 		Connection con = null;

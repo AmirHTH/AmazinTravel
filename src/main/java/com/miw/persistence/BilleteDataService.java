@@ -4,7 +4,10 @@
 package com.miw.persistence;
 
 
+import java.util.Vector;
+
 import com.miw.model.Billete;
+import com.miw.model.Usuario;
 
 
 /**
@@ -13,11 +16,9 @@ import com.miw.model.Billete;
  */
 public interface BilleteDataService {
 	public Billete crearBillete(Billete billete) throws Exception;
-	
-	//public boolean creaReserva(Billete billete) throws Exception;
-	
-	//public boolean cancelaReserva(int reservaID, String email) throws Exception;
 	public Billete cancelarReserva(Billete billete) throws Exception;
 	public Billete getBillete(Billete billete) throws Exception;
+	public Vector<Billete> getBilletesUsuario(Usuario usuario) throws Exception;
+	
 
 }

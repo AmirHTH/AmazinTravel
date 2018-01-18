@@ -6,11 +6,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Vector;
 
-import com.miw.model.Book;
 import com.miw.model.ParamBusquedaViaje;
 import com.miw.model.Usuario;
 import com.miw.model.Viaje;
-import com.miw.persistence.BookDataService;
 import com.miw.persistence.UsuarioDataService;
 
 

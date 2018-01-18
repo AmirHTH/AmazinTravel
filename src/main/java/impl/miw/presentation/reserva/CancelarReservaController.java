@@ -33,7 +33,7 @@ import com.miw.model.Usuario;
 import com.miw.model.Viaje;
 
 @Controller
-@SessionAttributes({"billete", "usuario", "paramBuscarReserva"})
+@SessionAttributes({"billete", "usuario", "paramBuscarReserva", "paramBuscarReserva"})
 public class CancelarReservaController {
 
 	@Autowired 
@@ -50,22 +50,25 @@ public class CancelarReservaController {
 	}	
 	
 	/*
-	@RequestMapping(value="private/cancelarReserva", method=RequestMethod.GET)
-    public void facturar(){
+	@RequestMapping(value="cancelarReserva", method=RequestMethod.GET)
+    public String cancelarReserva(Billete reservaBuscada, Model model){
+		model.addAttribute("reservaBuscada", reservaBuscada);
 		System.out.println("----- GET CancelarReserva ------");
-		billeteManagerService.cancelarReserva(paramBuscarReserva);
-    }
-	*/
+		//billeteManagerService.cancelarReserva(paramBuscarReserva);
+		model.addAttribute("reservaBuscada", reservaBuscada);
+		return "reserva/cancelarReserva";
+    }*/
+	
 	
 
 	
 	@RequestMapping(value="cancelarReserva", method = RequestMethod.GET)
-	public String cancelarReserva(ParamBuscarReserva paramBuscarReserva, Model model, BindingResult result ) throws Exception
+	public String cancelarReserva(ParamBuscarReserva paramBuscarReserva, BindingResult result, Model model ) throws Exception
 	{
 		Billete billete = billeteManagerService.cancelarReserva(paramBuscarReserva);
-		model.addAttribute("reservaBuscada", billete);
+		model.addAttribute("billete", billete);
 
-		return "reserva/cancelarReserva";
+		return "reserva/mostrarReserva";
 	}	
 	
 }

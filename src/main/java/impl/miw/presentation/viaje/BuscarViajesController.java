@@ -4,23 +4,19 @@ import java.util.Vector;
 
 import javax.validation.Valid;
 
-import impl.miw.presentation.shopingcart.ShoppingCart;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.SerializationUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import com.miw.business.BilleteManagerService;
+
 import com.miw.business.ViajeManagerService;
 import com.miw.model.Billete;
-import com.miw.model.ParamBusquedaViaje;
-import com.miw.model.Order;
 import com.miw.model.ParamBusquedaViaje;
 import com.miw.model.Viaje;
 
@@ -49,13 +45,12 @@ public class BuscarViajesController {
 	}*/
 
 	@RequestMapping(value="buscarViaje", method = RequestMethod.POST)
-	public String buscarViaje(@Valid @ModelAttribute ParamBusquedaViaje param, BindingResult result, Model model  )
+	public String buscarViaje(@Valid @ModelAttribute ParamBusquedaViaje param,  Model model, BindingResult result )
 	{
-
-		if ( result.hasErrors())
-		{
+		if ( result.hasErrors()){
 			System.out.println("---- Has Errors -----");
-			return "/";
+			//return "viaje/buscarViaje";
+			return "index";
 			
 		}else{
 			//new ParamBusquedaViaje();

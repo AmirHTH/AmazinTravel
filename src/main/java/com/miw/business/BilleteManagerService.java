@@ -18,5 +18,7 @@ public interface BilleteManagerService {
 	
 	public Billete getReserva(ParamBuscarReserva paramBuscarReserva) throws Exception;
 	public Billete getBillete(Billete billete) throws Exception;
+	
+	public Vector<Billete> getBilletesUsuario(Usuario usuario) throws Exception;
 
 }

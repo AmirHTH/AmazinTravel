@@ -6,15 +6,22 @@
 	
 	Buscar Reserva
 	
-	<p>Por favor, introduzca los datos de pago </p>
+
+	
 	
 	<form:form action="buscarReserva" commandName="paramBuscarReserva">
-		<form:errors path=""/>
-		<br/>
+	
+		<spring:hasBindErrors name="paramBuscarReserva">
+			<section id="errors">
+				<p><spring:message code="confirmarReservs.mensajeErrorCabecera"/></p>
+			</section>
+	    </spring:hasBindErrors>
+	
+
 		
-		<p>Identificador Reserva: <form:input path="idReserva" value="1"/> <form:errors path="idReserva"/></p>
+		<p>Identificador Reserva: <form:input path="idReserva" value="1"/> <form:errors class="validationError" path="idReserva"/></p>
 		
-		<p>Correo electrónico: <form:input path="mail" value="amir@amazin.com"/><form:errors path="mail"/></p>
+		<p>Correo electrónico: <form:input path="mail" value="amir@amazin.com"/><form:errors class="validationError" path="mail"/></p>
 		
 		<input type="submit" value="Buscar"/>
 		
@@ -31,18 +38,12 @@
 		<p>Billete de Vuelta Id:<c:out value="${reservaBuscada.billeteVueltaId}"></c:out></p>
 		<p>Estado:<c:out value="${reservaBuscada.estado}"></c:out></p>
 			
-		<c:if test="${reservaBuscada.estado = 'Confirmado'}" >
+		<c:if test="${reservaBuscada.estado =='Confirmado'}" >
 			<a href="cancelarReserva"><spring:message code="reserva.cancelarReserva"/>s</a>
 		</c:if>
 			
 	</c:if>
 		
-	
-	
-	<!-- En caso de que hubiese algún mensaje de error, lo mostramos -->
-	<p style="color: red;">
-		<c:out value="${message}"/>
-	</p>
 	
 <%@ include file='../templates/_footer.jsp'%>
 

@@ -8,19 +8,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Vector;
 
-import com.miw.model.Book;
 import com.miw.model.ParamBusquedaViaje;
 import com.miw.model.Viaje;
-import com.miw.persistence.BookDataService;
 import com.miw.persistence.ViajeDataService;
 
 /**
  * Clase que implementa las operaciones de acceso a la base de datos para la
- * entidad LIBRO.
+ * entidad VIAJE.
  * 
- * @author Daniel F. Lanvin
- * @since 24/02/2004
- * @version 1.0
  */
 public class ViajeDAO implements ViajeDataService {
 	/**

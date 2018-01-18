@@ -16,10 +16,10 @@
 
 	
 	<h3><spring:message code="confirmarViaje.h3.datosCobro"/></h3>
-	<p><spring:message code="pagar.nombre"/>Nombre: <c:out value="${usuario.nombre}"></c:out></p>
-	<p><spring:message code="pagar.apellidos"/>Apellidos: <c:out value="${usuario.apellidos}"></c:out></p>
-	<p><spring:message code="pagar.numeroIdentificacion"/>Número de identificación: <c:out value="${usuario.dni}"></c:out></p>
-	<p><spring:message code="pagar.correo"/>Correo electrónico: <c:out value="${usuario.mail}"></c:out></p>
+	<p><spring:message code="pagar.nombre"/>: <c:out value="${usuario.nombre}"></c:out></p>
+	<p><spring:message code="pagar.apellidos"/>: <c:out value="${usuario.apellidos}"></c:out></p>
+	<p><spring:message code="pagar.numeroIdentificacion"/>: <c:out value="${usuario.dni}"></c:out></p>
+	<p><spring:message code="pagar.correo"/>: <c:out value="${usuario.mail}"></c:out></p>
 
 
 	<c:choose>

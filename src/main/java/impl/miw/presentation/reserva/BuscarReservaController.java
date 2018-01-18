@@ -16,6 +16,8 @@ import javax.validation.Valid;
 
 
 
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +26,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionAttributeStore;
+import org.springframework.web.context.request.WebRequest;
 
 import com.miw.business.BilleteManagerService;
 import com.miw.business.ViajeManagerService;
@@ -34,7 +38,7 @@ import com.miw.model.Usuario;
 import com.miw.model.Viaje;
 
 @Controller
-@SessionAttributes({"billete", "usuario", "reservaBuscada", "paramBuscarReserva"})
+@SessionAttributes({"billete", "usuario", /* "reservaBuscada", */ "paramBuscarReserva"})
 public class BuscarReservaController {
 
 	@Autowired 
@@ -55,13 +59,14 @@ public class BuscarReservaController {
     public String buscarReserva(Model model){
 		System.out.println("----- GET BuscarReserva ------");
 		model.addAttribute("paramBuscarReserva", new ParamBuscarReserva());
+		//model.addAttribute("reservaBuscada", new Billete());
 		return "reserva/buscarReserva";
     }
 	
 
 	
 	@RequestMapping(value="buscarReserva", method = RequestMethod.POST)
-	public String buscarReserva(@Valid @ModelAttribute ParamBuscarReserva paramBuscarReserva, Model model, BindingResult result ) throws Exception
+	public String buscarReserva(@Valid @ModelAttribute ParamBuscarReserva paramBuscarReserva, BindingResult result, Model model ) throws Exception
 	{
 		if ( result.hasErrors())
 		{

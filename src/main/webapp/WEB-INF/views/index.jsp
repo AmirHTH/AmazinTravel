@@ -5,9 +5,9 @@
 	<p><spring:message code="buscarViaje.descripcionPagina"/></p>
 	
 	<form:form action="buscarViaje" commandName="paramBusquedaViaje" >	
-		
 		<spring:hasBindErrors name="paramBusquedaViaje">
 			<section id="errors">
+			 	<c:set var="validationErrors" value="true" />
 				<p><spring:message code="buscarViaje.mensajeErrorCabecera"/></p>
 				<ul>
 					<c:forEach var="error" items="${errors.allErrors}">
@@ -45,6 +45,7 @@
 		<input name="submit" type="submit" value="${submitText}" />
 	</form:form>
 	
+	<c:if test="${!validationErrors}">
 	<form:form action="processForm" method="post" commandName="billete">
 	<c:choose>
 		<c:when test="${not empty viajesIdaList}" >
@@ -151,6 +152,6 @@
 	</c:if>
 	
 	</form:form>
-	
+	</c:if>
 	
 <%@ include file='templates/_footer.jsp'%>

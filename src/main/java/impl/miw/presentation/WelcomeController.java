@@ -17,6 +17,7 @@ import com.miw.model.ParamBusquedaViaje;
 
 
 @Controller
+@SessionAttributes("billete")
 public class WelcomeController implements ServletContextAware{
 	
 	 @Autowired
