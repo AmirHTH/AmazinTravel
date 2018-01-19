@@ -40,24 +40,8 @@ public class ConfirmarViajeController {
 		try {
 			System.out.println("Billete: " + billete.toString());
 			System.out.println("Usuario: " + usuario.toString());
-			int resultado = this.billeteManagerService.crearBillete(billete, usuario);
-			String mensajeResultado = "";
-			switch(resultado){
-				case BilleteManager.RESULTADO_CORRECTO:
-					mensajeResultado = "";
-					model.addAttribute("estaConfirmado", "Confirmado");
-					break;
-				case BilleteManager.RESULTADO_ERROR_VUELO_IDA_LLENO:
-					mensajeResultado = "";
-					break;
-				case BilleteManager.RESULTADO_ERROR_VUELO_VUELTA_LLENO:
-					mensajeResultado = "";
-					break;
-				default:
-					mensajeResultado = "";
-					break;
-			}
-			
+			billete = this.billeteManagerService.crearBillete(billete, usuario);
+			model.addAttribute("billete", billete);
 			
 		} catch (Exception e) {
 			

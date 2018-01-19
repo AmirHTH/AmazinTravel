@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.miw.business.UsuarioManagerService;
 import com.miw.business.ViajeManagerService;
+import com.miw.model.Billete;
 import com.miw.model.ParamBusquedaViaje;
 import com.miw.model.Usuario;
 import com.miw.model.Viaje;
@@ -31,12 +32,20 @@ public class UsuarioManager implements UsuarioManagerService {
 	}
 	
 	public Usuario getUsuario(Usuario usuario) throws Exception{
-		return this.usuarioDataService.getUsuario(usuario);
+		Vector<Usuario> usuarios = usuarioDataService.getAllUsuarios();
+		for (Usuario usuarioBD: usuarios){
+			if(usuarioBD.getMail().equals(usuario)){
+				return usuarioBD;
+			}
+		}
+		return null;
 	}
 	
 	public Usuario getUsuarioById(Usuario usuario) throws Exception{
 		return this.usuarioDataService.getUsuarioById(usuario);
 	}
+	
+	
 
 
 	

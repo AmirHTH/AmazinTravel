@@ -43,7 +43,7 @@ public class BilleteManager implements BilleteManagerService {
 	}
 
 	
-	public int crearBillete(Billete billete, Usuario usuario) throws Exception{
+	public Billete crearBillete(Billete billete, Usuario usuario) throws Exception{
 		int codigoResultadoOperacion  = RESULTADO_PROCESO_NO_INICIADO;
 		
 		//Tenemos que revisar primero que siga habiendo sitio en los vuelos que el usuario desea comprar, pudo pasar que en el tiempo que pasa entre que buscó los vuelos y los confirma
@@ -62,7 +62,7 @@ public class BilleteManager implements BilleteManagerService {
 				if(plazasLibresVuelta < billete.getPlazas()){
 					//Si no hay plazas ya en el vuelo de vuelta.
 					codigoResultadoOperacion = RESULTADO_ERROR_VUELO_VUELTA_LLENO;
-					return codigoResultadoOperacion;
+					return billete;
 				}
 			}	
 			
@@ -87,7 +87,7 @@ public class BilleteManager implements BilleteManagerService {
 			
 			if(billete != null){
 				codigoResultadoOperacion = RESULTADO_CORRECTO;
-				billete.setEstado(Billete.ESTADO_SIN_CONFIRMAR);
+				billete.setEstado(Billete.ESTADO_CONFIRMADO);
 			}
 			
 		}else{
@@ -95,7 +95,7 @@ public class BilleteManager implements BilleteManagerService {
 			codigoResultadoOperacion = RESULTADO_ERROR_VUELO_IDA_LLENO;
 		}
 		
-		return codigoResultadoOperacion;
+		return billete;
 	}
 	
 	public void agregarViajesABillete(Billete billete) throws Exception{
@@ -212,70 +212,6 @@ public class BilleteManager implements BilleteManagerService {
 	
 
 	
-/*
-	public void setViajeDataService(ViajeDataService viajeDataService) {
-		this.viajeDataService = viajeDataService;
-	}
 
-	public void setIvaDataService(IvaDataService ivaDataService) {
-		this.ivaDataService = ivaDataService;
-	}
-
-	public Vector<Viaje> getViajes() throws Exception
-	{
-		
-		Vector<Viaje> viajes = viajeDataService.getViajes();
-		//Vector<Iva> ivas= ivaDataService.getIvas();
-		/*
-		for ( Viaje viaje: viajes)
-		{
-			for ( Iva iva:ivas)
-			{
-				if ( book.getFamily()==iva.getFamily())
-				{
-					//Aplicamos el descuento por familia al calcular el precio
-					book.setPrice(book.getBasePrice()*iva.getValue()*(100-disccounts.get(book.getFamily() ) )/100 );
-					
-				}
-			}
-		}
-		*//*
-		return viajes;
-	}
-
-	@Override
-	public Vector<Viaje> getViajesIda(ParamBusquedaViaje paramBusquedaViaje) throws Exception {
-		Vector<Viaje> viajes = viajeDataService.getViajesIda(paramBusquedaViaje);
-		return viajes;
-	}
-	
-	@Override
-	public Vector<Viaje> getViajesVuelta(ParamBusquedaViaje paramBusquedaViaje) throws Exception {
-		Vector<Viaje> viajes = viajeDataService.getViajesVuelta(paramBusquedaViaje);
-		return viajes;
-	}
-	
-	public boolean hayViajesConPlazasLibres(ParamBusquedaViaje paramBusquedaViaje) throws Exception{
-		return viajeDataService.hayViajesConPlazasLibres(paramBusquedaViaje);
-	}
-*/	
-	
-	
-	/*
-	@Override
-	public Book getSpecialOffer() throws Exception
-	{
-		Vector<Book> books = getBooks();
-		int number = (int) (Math.random()*books.size()-1);
-		System.out.println("Aplicando descuento a "+books.elementAt(number).getTitle());
-		books.elementAt(number).setPrice((double)books.elementAt(number).getPrice()*0.9);
-		return books.elementAt(number);
-	}
-
-	public Book newBook(Book book) throws Exception {
-		// TODO Auto-generated method stub
-		return this.bookDataService.newBook(book);
-	}
-	*/
 	
 }

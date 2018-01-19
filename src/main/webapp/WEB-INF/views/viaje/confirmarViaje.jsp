@@ -3,8 +3,6 @@
 	<h3><spring:message code="confirmarViaje.h3.titulo"/></h3>
 	<p><spring:message code="confirmarViaje.descripcionPagina"/></p>
 	
-	
-	<p><spring:message code="detallesViaje.numeroReserva"/> <c:out value="${billete.billeteId}"></c:out></p>
 	<p><spring:message code="detallesViaje.viajeIda"/> <c:out value="${billete.viajeId}"></c:out></p>
 	<p><spring:message code="detallesViaje.viajeVuelta"/> <c:out value="${billete.billeteVueltaId}"></c:out></p>
 	<p><spring:message code="detallesViaje.plazasCompradas"/> <c:out value="${billete.plazas}"></c:out></p>

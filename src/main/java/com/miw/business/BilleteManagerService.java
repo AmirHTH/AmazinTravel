@@ -8,7 +8,7 @@ import com.miw.model.Usuario;
 
 public interface BilleteManagerService {
 	
-	public int crearBillete(Billete billete, Usuario usuario) throws Exception;
+	public Billete crearBillete(Billete billete, Usuario usuario) throws Exception;
 	public void agregarViajesABillete(Billete billete) throws Exception;
 	public int calcularPrecioFinal(Billete billete) throws Exception;
 	

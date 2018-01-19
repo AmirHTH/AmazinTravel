@@ -38,7 +38,8 @@ public class UsuarioDAO implements UsuarioDataService {
 
 			try {
 				
-				ps = con.prepareStatement("select * from usuario where mail = (?)");
+				//ps = con.prepareStatement("select * from usuario where mail=\"" + usuario.getMail()+"\"");
+				ps = con.prepareStatement("select * from usuario where mail=?)");
 				ps.setString(1, usuario.getMail());
 				rs = ps.executeQuery();
 				
@@ -169,6 +170,45 @@ public class UsuarioDAO implements UsuarioDataService {
 		}
 		// Retornamos el vector de resultado.
 		return usuario;
+	}
+	
+	public Vector<Usuario> getAllUsuarios() throws Exception{
+		Vector<Usuario> usuarios = new Vector<Usuario>();
+		
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Connection con = conectarConBD();
+
+		try {
+			
+			ps = con.prepareStatement("select * from usuario");
+			rs = ps.executeQuery();
+
+				while (rs.next()) {
+					// Completamos los datos del usuario
+					Usuario usuario = new Usuario();
+					usuario.setUsuarioId(rs.getInt("usuarioid"));
+					usuario.setNombre(rs.getString("nombre"));
+					usuario.setApellidos(rs.getString("apellidos"));
+					usuario.setMail(rs.getString("mail"));
+					usuario.setDni(rs.getString("dni"));
+					usuarios.add(usuario);
+				}
+		
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw (e);
+		} finally {
+			try {
+				ps.close();
+				con.close();
+			} catch (Exception e) {
+			}
+		}
+		// Retornamos el vector de resultado.
+		
+		return usuarios;
 	}
 
 }

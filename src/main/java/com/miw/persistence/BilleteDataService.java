@@ -19,6 +19,7 @@ public interface BilleteDataService {
 	public Billete cancelarReserva(Billete billete) throws Exception;
 	public Billete getBillete(Billete billete) throws Exception;
 	public Vector<Billete> getBilletesUsuario(Usuario usuario) throws Exception;
+	public Vector<Billete> getAllBilletes() throws Exception;
 	
 
 }

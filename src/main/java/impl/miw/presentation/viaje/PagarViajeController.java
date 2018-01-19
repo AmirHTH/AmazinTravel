@@ -73,43 +73,6 @@ public class PagarViajeController {
         	
 		return "viaje/confirmarViaje";
 		}
-	}
-	
-	
-	/*
-	@RequestMapping("private/procesarBillete")
-	public String procesarBillete(Usuario usuario, Billete billete, Model model  )
-	{
-		try {
-			System.out.println("Billete: " + billete.toString());
-			System.out.println("Usuario: " + usuario.toString());
-			int resultado = this.billeteManagerService.crearBillete(billete, usuario);
-			String mensajeResultado = "";
-			switch(resultado){
-				case BilleteManager.RESULTADO_CORRECTO:
-					mensajeResultado = "";
-					model.addAttribute("estaConfirmado", "Confirmado");
-					break;
-				case BilleteManager.RESULTADO_ERROR_VUELO_IDA_LLENO:
-					mensajeResultado = "";
-					break;
-				case BilleteManager.RESULTADO_ERROR_VUELO_VUELTA_LLENO:
-					mensajeResultado = "";
-					break;
-				default:
-					mensajeResultado = "";
-					break;
-			}
-			
-			
-		} catch (Exception e) {
-			
-			e.printStackTrace();
-		}
-		
-		return "private/showBilleteConfirmacion";
-	}
-	*/
-	
+	}	
 	
 }

@@ -29,7 +29,7 @@ private Integer times=0;
 	}
 
 	@Override
-	public int crearBillete(Billete billete, Usuario usuario) throws Exception {
+	public Billete crearBillete(Billete billete, Usuario usuario) throws Exception {
 		return billeteManager.crearBillete(billete, usuario);
 	}
 
