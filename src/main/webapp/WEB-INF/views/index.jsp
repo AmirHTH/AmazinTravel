@@ -149,6 +149,12 @@
 			<input name="alquilarCoche" type="submit" value="${alquilar}" />
 			<input name="detalles" type="submit" value="${detalles}" />			
 		</p>
+		
+		<p>
+			<spring:message code="imprimir" var="imprimir"/>
+			<input type="submit" value="${imprimir}" onClick="window.print()"/>
+		</p>
+		
 	</c:if>
 	
 	</form:form>

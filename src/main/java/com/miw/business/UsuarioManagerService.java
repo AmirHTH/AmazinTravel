@@ -8,6 +8,7 @@ public interface UsuarioManagerService {
 	
 	public Usuario crearUsuario(Usuario usuario) throws Exception;
 	public Usuario getUsuario(Usuario usuario) throws Exception;
+	public Usuario getUsuarioById(Usuario usuario) throws Exception;
 
 	//public abstract Viaje getSpecialOffer() throws Exception;	
 	

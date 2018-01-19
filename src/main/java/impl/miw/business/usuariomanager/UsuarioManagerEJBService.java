@@ -30,7 +30,13 @@ public class UsuarioManagerEJBService implements UsuarioManagerService{
 	@Override
 	public Usuario getUsuario(Usuario usuario) throws Exception
 	{
-		return usuarioManager.crearUsuario(usuario);
+		return usuarioManager.getUsuario(usuario);
+	}
+	
+	@Override
+	public Usuario getUsuarioById(Usuario usuario) throws Exception
+	{
+		return usuarioManager.getUsuarioById(usuario);
 	}
 	
 	@Override

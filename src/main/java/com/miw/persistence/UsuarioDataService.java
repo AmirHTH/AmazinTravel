@@ -16,5 +16,6 @@ import com.miw.model.Viaje;
 public interface UsuarioDataService {
 	public Usuario crearUsuario(Usuario usuario) throws Exception;
 	public Usuario getUsuario(Usuario usuario) throws Exception;
+	public Usuario getUsuarioById(Usuario usuario) throws Exception;
 	
 }

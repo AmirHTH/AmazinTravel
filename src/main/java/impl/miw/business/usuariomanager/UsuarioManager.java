@@ -33,6 +33,10 @@ public class UsuarioManager implements UsuarioManagerService {
 	public Usuario getUsuario(Usuario usuario) throws Exception{
 		return this.usuarioDataService.getUsuario(usuario);
 	}
+	
+	public Usuario getUsuarioById(Usuario usuario) throws Exception{
+		return this.usuarioDataService.getUsuarioById(usuario);
+	}
 
 
 	

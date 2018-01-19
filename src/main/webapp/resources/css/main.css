@@ -84,3 +84,8 @@ th{
 .bold{
 	font-weight: bold;
 }
+
+.validationError{
+	color: red;
+	margin-left: 1em;
+}

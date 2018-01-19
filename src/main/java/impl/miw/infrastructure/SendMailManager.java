@@ -15,12 +15,11 @@ import javax.mail.internet.MimeMessage;
 import com.miw.model.Billete;
 
 public class SendMailManager {
-	private static SendMailManager instance = null;
 	private String host = "smtp.gmail.com"; 
 	private String port = "587";
 	
-	String from = "burrow.tv@gmail.com";
-    String password = "moganmogan";
+	String from = "amazin.travels.miw@gmail.com";
+    String password = "miw.224485";
 	 
 	private boolean debug;
 	 

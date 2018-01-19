@@ -19,9 +19,9 @@
 		</c:when>
 		<c:otherwise>
 			<p>
-				<a href="facturar">Facturar Maletas</a>
-				<a href="alquilarCoche">Contratar coche de alquiler</a>
-				<a href="pagarViaje">Confirmar y Pagar</a>
+				<a href="<c:url value="facturar"/>"><spring:message code="detallesViaje.facturar"/></a>
+				<a href="<c:url value="alquilarCoche"/>"><spring:message code="detallesViaje.alquilarCoche"/></a>
+				<a href="<c:url value="pagarViaje"/>"><spring:message code="detallesViaje.confirmar"/></a>				
 			</p>
 		</c:otherwise>
 	</c:choose>

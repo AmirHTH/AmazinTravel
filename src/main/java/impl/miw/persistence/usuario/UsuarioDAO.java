@@ -71,6 +71,47 @@ public class UsuarioDAO implements UsuarioDataService {
 			// Retornamos el vector de resultado.
 			return usuario;
 	}
+		
+		public Usuario getUsuarioById(Usuario usuario) throws Exception {
+			PreparedStatement ps = null;
+			ResultSet rs = null;
+			Connection con = conectarConBD();
+
+			try {
+				
+				ps = con.prepareStatement("select * from usuario where usuarioId = ?");
+				ps.setInt(1, usuario.getUsuarioId());
+				rs = ps.executeQuery();
+				
+				if (!rs.next() ) {
+				    usuario = null;
+				} 
+				
+				else{
+
+					while (rs.next()) {
+						// Completamos los datos del usuario
+						usuario.setUsuarioId(rs.getInt("usuarioid"));
+						usuario.setNombre(rs.getString("nombre"));
+						usuario.setApellidos(rs.getString("apellidos"));
+						usuario.setMail(rs.getString("mail"));
+						usuario.setDni(rs.getString("dni"));
+					}
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw (e);
+			} finally {
+				try {
+					ps.close();
+					con.close();
+				} catch (Exception e) {
+				}
+			}
+			// Retornamos el vector de resultado.
+			return usuario;
+	}
 
 	public synchronized Usuario crearUsuario(Usuario usuario) throws Exception {
 

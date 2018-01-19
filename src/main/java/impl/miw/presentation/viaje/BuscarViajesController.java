@@ -45,7 +45,7 @@ public class BuscarViajesController {
 	}*/
 
 	@RequestMapping(value="buscarViaje", method = RequestMethod.POST)
-	public String buscarViaje(@Valid @ModelAttribute ParamBusquedaViaje param,  Model model, BindingResult result )
+	public String buscarViaje(@Valid @ModelAttribute ParamBusquedaViaje param,  BindingResult result, Model model )
 	{
 		if ( result.hasErrors()){
 			System.out.println("---- Has Errors -----");

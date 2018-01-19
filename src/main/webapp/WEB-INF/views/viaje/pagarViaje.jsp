@@ -6,29 +6,32 @@
 
 	
 	<form:form action="pagarViaje" commandName="usuario">
-		<form:errors path=""/>
-		<br/>
+		<spring:hasBindErrors name="paramBusquedaViaje">
+			<section id="errors">
+				<p><spring:message code="pagar.mensajeErrorCabecera"/></p>
+			</section>
+    	</spring:hasBindErrors>
 		
 		<p>
 			<form:label path="nombre"><spring:message code="pagar.nombre"/></form:label>
-			<form:input path="nombre" value="Amir"/>
-			<form:errors path="nombre"/>
+			<form:input path="nombre" value="Amir" />
+			<form:errors path="nombre" class="validationError"/>
 		</p>
 		<p>
 			<form:label path="apellidos"><spring:message code="pagar.apellidos"/></form:label>
-			<form:input path="apellidos" value="Tofigh"/>
-			<form:errors path="apellidos"/>
+			<form:input path="apellidos" value="Tofigh" />
+			<form:errors path="apellidos" class="validationError"/>
 		</p>
 		<p>
 			<form:label path="dni"><spring:message code="pagar.numeroIdentificacion"/></form:label>
-			<form:input path="dni" value="789789789"/>
-			<form:errors path="dni"/>
+			<form:input path="dni" value="789789789" />
+			<form:errors path="dni" class="validationError"/>
 		</p>
 		
 		<p>
 			<form:label path="mail"><spring:message code="pagar.correo"/></form:label>
-			<form:input path="mail" value="amir@amazin.com"/>
-			<form:errors path="mail"/>
+			<form:input path="mail" value="amir@amazin.com" />
+			<form:errors path="mail" class="validationError"/>
 		</p>
 		
 		<spring:message code="pagar.form.submit" var="pagar"/>
@@ -36,11 +39,6 @@
 		
 	</form:form>		
 
-	
-	<!-- En caso de que hubiese algún mensaje de error, lo mostramos -->
-	<p style="color: red;">
-		<c:out value="${message}"/>
-	</p>
 	
 <%@ include file='../templates/_footer.jsp'%>
 
