@@ -1,39 +1,61 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+<beans 
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans"
 
-	xsi:schemaLocation="http://www.springframework.org/schema/beans
-http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
-http://www.springframework.org/schema/context
-http://www.springframework.org/schema/context/spring-context-4.0.xsd
-http://www.springframework.org/schema/security
-http://www.springframework.org/schema/security/spring-security-3.2.xsd">
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-4.0.xsd
+	http://www.springframework.org/schema/security
+	http://www.springframework.org/schema/security/spring-security-3.2.xsd">
+	
 
 	<!-- security configuration -->
 	
 	<!-- <security:global-method-security secured-annotations="enabled" /> -->
 	<security:global-method-security secured-annotations="disabled" /> 
 	
-	<security:http auto-config="true">
-		<security:intercept-url pattern="/private/**"
-			access="ROLE_ADMIN" />
-		<security:intercept-url pattern="/main/**"
-			access="ROLE_ADMIN" />
-		<security:form-login login-page="/login"
-			default-target-url="/" authentication-failure-url="/loginError" />
+	
+	<security:http auto-config="true" use-expressions="true">
+		<security:intercept-url pattern="/private/**" access="ROLE_ADMIN" />
+		<security:intercept-url pattern="/main/**" access="ROLE_ADMIN" />
+		<security:form-login login-page="/login" default-target-url="/" authentication-failure-url="/loginError" />
 	</security:http>
 
 	<security:authentication-manager>
+		<!--  
 		<security:authentication-provider>
 			<security:user-service>
-				<security:user name="admin" password="amazin"
-					authorities="ROLE_ADMIN" />
-				<security:user name="manager" password="amazin"
-					authorities="ROLE_ADMIN,ROLE_MANAGER" />
+				<security:user name="admin" password="amazin" authorities="ROLE_ADMIN" />
+				<security:user name="manager" password="amazin" authorities="ROLE_ADMIN,ROLE_MANAGER" />
 			</security:user-service>
 		</security:authentication-provider>
+		
+		
+		<security:authentication-provider user-service-ref="myUserDetailsService" >
+       		 <security:password-encoder ref="passwordEncoder">
+        	 </security:password-encoder>
+    	</security:authentication-provider>
+    	-->
+    	
+    	<security:authentication-provider>
+             <security:jdbc-user-service data-source-ref="dataSource"
+             	authorities-by-username-query="SELECT email, role FROM usuario WHERE email = ?"
+                users-by-username-query="SELECT email, password, enabled FROM usuario WHERE email = ?"/>
+          </security:authentication-provider>
 	</security:authentication-manager>
+	
+	<beans:bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+    	<beans:property name="driverClassName" value="org.mariadb.jdbc.Driver"/>
+        <beans:property name="url" value="jdbc:mariadb://localhost/amazin"/>
+        <beans:property name="username" value="dflanvin"/>
+        <beans:property name="password" value="amazin"/>
+    </beans:bean>
 
 </beans>

@@ -11,7 +11,10 @@ import javax.validation.Valid;
 
 
 
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -73,19 +76,24 @@ public class MostrarReservaController {
 		return "reserva/mostrarReserva";	
 	}
 	
+	/*
 	@RequestMapping(value="mostrarReservasUsuario", method=RequestMethod.GET)
     public String buscarReservasUsuario(Model model){
 		System.out.println("----- GET BuscarReserva ------");
 		//model.addAttribute("paramBuscarReserva", new ParamBuscarReserva());
 		//model.addAttribute("reservaBuscada", new Billete());
 		return "reserva/mostrarReservasUsuario";
-    }
+    }*/
 	
 	@RequestMapping("mostrarReservasUsuario")
-	public String mostrarReservasUsuario(@RequestParam(value="idUsuario", required=true) Integer idUsuario, Model model) throws Exception {
+	public String mostrarReservasUsuario(Model model) throws Exception {
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String mail = auth.getName(); //get logged in username
 		Usuario usuario = new Usuario();
-		usuario.setUsuarioId(idUsuario);
-		usuario = usuarioManagerService.getUsuarioById(usuario);
+		usuario.setMail(mail);
+		
+		usuario = usuarioManagerService.getUsuario(usuario);
 		Vector<Billete> billetesUsuario = billeteManagerService.getBilletesUsuario(usuario);
 		
 		// Colocamos la lista de viajes en el modelo

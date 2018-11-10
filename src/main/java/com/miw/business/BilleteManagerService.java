@@ -1,5 +1,6 @@
 package com.miw.business;
 
+import java.util.LinkedHashMap;
 import java.util.Vector;
 
 import com.miw.model.Billete;
@@ -18,5 +19,7 @@ public interface BilleteManagerService {
 	public Billete getBillete(Billete billete) throws Exception;
 	
 	public Vector<Billete> getBilletesUsuario(Usuario usuario) throws Exception;
+	
+	public LinkedHashMap<Integer, String> getDestinosMasPopulares() throws Exception;
 
 }

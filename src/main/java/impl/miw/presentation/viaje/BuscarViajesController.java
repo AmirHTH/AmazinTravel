@@ -45,7 +45,7 @@ public class BuscarViajesController {
 	}*/
 
 	@RequestMapping(value="buscarViaje", method = RequestMethod.POST)
-	public String buscarViaje(@Valid @ModelAttribute ParamBusquedaViaje param,  BindingResult result, Model model )
+	public String buscarViaje(@Valid @ModelAttribute ParamBusquedaViaje param, BindingResult result, Model model )
 	{
 		if ( result.hasErrors()){
 			System.out.println("---- Has Errors -----");
@@ -63,19 +63,20 @@ public class BuscarViajesController {
 			try {
 				viajesIda = viajeManagerService.getViajesIda(param);
 			
-			// Colocamos la lista de viajes en el modelo
-			model.addAttribute("viajesIdaList", viajesIda);
-			Billete billete = new Billete();
-			billete.setPlazas(param.getPlazas());
-			model.addAttribute("billete", billete);
+				// Colocamos la lista de viajes en el modelo
+				model.addAttribute("viajesIdaList", viajesIda);
+				Billete billete = new Billete();
+				billete.setPlazas(param.getPlazas());
+				model.addAttribute("billete", billete);
 			
         	
         	if(viajesIda != null && viajesIda.isEmpty()){
         		boolean hayViajes = viajeManagerService.hayViajesConPlazasLibres(param);
         		if(hayViajes){ //Si hay viajes para esa fecha pero no se nos han devuelto resultados, es que no hay plazas libres.
-        			model.addAttribute("mensajeViajesIda", "No hay " + param.getPlazas() + " plazas libres en los viajes disponibles.");
+        			model.addAttribute("mensajeViajesIda", "buscarViaje.mensaje.noPlazasLibres");
         		}else{
-        			model.addAttribute("mensajeViajesIda", "No hay viajes para ese Origen, Destino y fecha de salida.");
+        			model.addAttribute("mensajeViajesIda", "buscarViaje.mensaje.noViajes");
+        			//"No hay viajes para ese Origen, Destino y fecha de salida."
         		}
         	}
         	
@@ -99,14 +100,18 @@ public class BuscarViajesController {
 	        			model.addAttribute("mensajeViajesVuelta", "No hay viajes para ese Origen, Destino y fecha de salida.");
 	        		}
 	        	}
-			}	
+			}
+        	
+        	model.addAttribute("numViajesOrigen", viajeManagerService.viajesOrigen(param.getOrigen()));
+        	model.addAttribute("numViajesDestino", viajeManagerService.viajesDestino(param.getDestino()));
+        	
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
         	
-		return "index";
+		return "viaje/resultadosBusquedaViajes";
 	}
 	
 	/*

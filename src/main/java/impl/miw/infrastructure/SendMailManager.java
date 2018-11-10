@@ -19,7 +19,7 @@ public class SendMailManager {
 	private String port = "587";
 	
 	String from = "amazin.travels.miw@gmail.com";
-    String password = "miw.224485";
+    String password = "XXXXXXXXXXXXXXXX";
 	 
 	private boolean debug;
 	 

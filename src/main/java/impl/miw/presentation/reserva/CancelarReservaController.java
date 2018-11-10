@@ -14,7 +14,7 @@ import com.miw.model.ParamBuscarReserva;
 
 
 @Controller
-@SessionAttributes({"billete", "usuario", "paramBuscarReserva", "paramBuscarReserva"})
+@SessionAttributes({/*"billete",*/ "usuario", "paramBuscarReserva", "paramBuscarReserva"})
 public class CancelarReservaController {
 
 	@Autowired 
@@ -47,7 +47,7 @@ public class CancelarReservaController {
 	public String cancelarReserva(ParamBuscarReserva paramBuscarReserva, BindingResult result, Model model ) throws Exception
 	{
 		Billete billete = billeteManagerService.cancelarReserva(paramBuscarReserva);
-		model.addAttribute("billete", billete);
+		model.addAttribute("reservaBuscada", billete);
 
 		return "reserva/mostrarReserva";
 	}	

@@ -41,7 +41,7 @@ public class ConfirmarViajeController {
 			System.out.println("Billete: " + billete.toString());
 			System.out.println("Usuario: " + usuario.toString());
 			billete = this.billeteManagerService.crearBillete(billete, usuario);
-			model.addAttribute("billete", billete);
+			model.addAttribute("reservaBuscada", billete);
 			
 		} catch (Exception e) {
 			

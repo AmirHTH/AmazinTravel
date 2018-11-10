@@ -18,8 +18,11 @@ public class UsuarioDAO implements UsuarioDataService {
 		Connection con = null;
 
 		try {
-			String SQL_DRV = "org.hsqldb.jdbcDriver";
-			String SQL_URL = "jdbc:hsqldb:hsql://localhost/amazin";
+			//String SQL_DRV = "org.hsqldb.jdbcDriver";
+			//String SQL_URL = "jdbc:hsqldb:hsql://localhost/amazin";
+			
+			String SQL_DRV = "org.mariadb.jdbc.Driver";
+			String SQL_URL = "jdbc:mariadb://localhost/amazin";
 
 			// Obtenemos la conexion a la base de datos.
 			Class.forName(SQL_DRV);
@@ -31,7 +34,7 @@ public class UsuarioDAO implements UsuarioDataService {
 	}
 	
 	
-		public Usuario getUsuario(Usuario usuario) throws Exception {
+	public Usuario getUsuario(Usuario usuario) throws Exception {
 			PreparedStatement ps = null;
 			ResultSet rs = null;
 			Connection con = conectarConBD();
@@ -39,7 +42,7 @@ public class UsuarioDAO implements UsuarioDataService {
 			try {
 				
 				//ps = con.prepareStatement("select * from usuario where mail=\"" + usuario.getMail()+"\"");
-				ps = con.prepareStatement("select * from usuario where mail=?)");
+				ps = con.prepareStatement("select * from usuario where email=?");
 				ps.setString(1, usuario.getMail());
 				rs = ps.executeQuery();
 				
@@ -47,16 +50,16 @@ public class UsuarioDAO implements UsuarioDataService {
 				if (!rs.next() ) {
 				    usuario = null;
 				} 
-				
 				else{
 
-					while (rs.next()) {
+					//while (rs.next()) {
 						// Completamos los datos del usuario
 						usuario.setUsuarioId(rs.getInt("usuarioid"));
 						usuario.setNombre(rs.getString("nombre"));
 						usuario.setApellidos(rs.getString("apellidos"));
+						usuario.setTipoDocumento(rs.getString("tipoDocumento"));
 						usuario.setDni(rs.getString("dni"));
-					}
+					//}
 				}
 
 			} catch (Exception e) {
@@ -72,6 +75,8 @@ public class UsuarioDAO implements UsuarioDataService {
 			// Retornamos el vector de resultado.
 			return usuario;
 	}
+	
+	
 		
 		public Usuario getUsuarioById(Usuario usuario) throws Exception {
 			PreparedStatement ps = null;
@@ -95,7 +100,8 @@ public class UsuarioDAO implements UsuarioDataService {
 						usuario.setUsuarioId(rs.getInt("usuarioid"));
 						usuario.setNombre(rs.getString("nombre"));
 						usuario.setApellidos(rs.getString("apellidos"));
-						usuario.setMail(rs.getString("mail"));
+						usuario.setMail(rs.getString("email"));
+						usuario.setTipoDocumento(rs.getString("tipoDocumento"));
 						usuario.setDni(rs.getString("dni"));
 					}
 				}
@@ -118,26 +124,9 @@ public class UsuarioDAO implements UsuarioDataService {
 
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		Connection con = null;
+		Connection con = conectarConBD();
 
 		try {
-			String SQL_DRV = "org.hsqldb.jdbcDriver";
-			String SQL_URL = "jdbc:hsqldb:hsql://localhost/amazin";
-
-			// Obtenemos la conexiï¿½n a la base de datos.
-			Class.forName(SQL_DRV);
-			con = DriverManager.getConnection(SQL_URL, "dflanvin", "amazin");
-			
-			/*
-			 * CREATE MEMORY TABLE USUARIO(
-	USUARIOID INTEGER IDENTITY NOT NULL PRIMARY KEY,
-	NOMBRE VARCHAR(50),
-	APELLIDOS VARCHAR(100),
-	DNI VARCHAR(20),
-	MAIL VARCHAR(50),
-	constraint USUARIO_UN unique (USUARIOID)
-	)	*/
-			
 			
 			ps = con.prepareStatement("select max(usuarioid) as maximo from usuario");
 			rs = ps.executeQuery();
@@ -148,14 +137,16 @@ public class UsuarioDAO implements UsuarioDataService {
 			
 			System.out.println("Máximo id encontrado: "+id);
 			
-			usuario.setUsuarioId(id);
+			usuario.setUsuarioId(id+1);
 			//Creamos el usuario
-			ps = con.prepareStatement("insert into usuario values (?,?,?,?,?)");
+			ps = con.prepareStatement("insert into usuario (usuarioid, nombre, apellidos, tipoDocumento, dni, email, password) values (?,?,?,?,?,?,?)");
 			ps.setInt(1, id+1);
 			ps.setString(2, usuario.getNombre());
 			ps.setString(3, usuario.getApellidos());
-			ps.setString(4, usuario.getDni());
-			ps.setString(5, usuario.getMail());
+			ps.setString(4, usuario.getTipoDocumento());
+			ps.setString(5, usuario.getDni());
+			ps.setString(6, usuario.getMail());
+			ps.setString(7, usuario.getPassword());
 			ps.executeUpdate();
 
 		} catch (Exception e) {
@@ -190,7 +181,8 @@ public class UsuarioDAO implements UsuarioDataService {
 					usuario.setUsuarioId(rs.getInt("usuarioid"));
 					usuario.setNombre(rs.getString("nombre"));
 					usuario.setApellidos(rs.getString("apellidos"));
-					usuario.setMail(rs.getString("mail"));
+					usuario.setMail(rs.getString("email"));
+					usuario.setTipoDocumento(rs.getString("tipoDocumento"));
 					usuario.setDni(rs.getString("dni"));
 					usuarios.add(usuario);
 				}

@@ -2,6 +2,7 @@
 
 package impl.miw.business.billetemanager;
 
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Vector;
 
@@ -36,7 +37,7 @@ public class BilleteManager implements BilleteManagerService {
 	private ViajeDataService viajeManagerService;
 	
 	@Autowired
-	private UsuarioDataService usuarioManagerService;
+	private UsuarioManagerService usuarioManagerService;
 	
 	public void setBilleteDataService(BilleteDataService billeteDataService) {
 		this.billeteDataService = billeteDataService;
@@ -104,7 +105,7 @@ public class BilleteManager implements BilleteManagerService {
 			viaje.setViajeId(billete.getViajeId());
 			billete.setViajeIda(viajeManagerService.getViaje(viaje));
 		}
-		if(billete.getTipo().equals(Billete.VUELTA) && billete.getViajeVuelta() == null){
+		if(billete.getViajeVuelta() == null){
 			viaje = new Viaje();
 			viaje.setViajeId(billete.getBilleteVueltaId());
 			billete.setViajeVuelta(viajeManagerService.getViaje(viaje));
@@ -136,34 +137,50 @@ public class BilleteManager implements BilleteManagerService {
 		return 0;		
 	}
 	
+	/*
 	public Billete getBillete(Billete billete) throws Exception{
-		return billeteDataService.getBillete(billete);
+		return billeteDataService.getBilleteByIdAndUser(billete);
+	}
+	*/
+	
+	public LinkedHashMap<Integer, String> getDestinosMasPopulares() throws Exception{
+		return billeteDataService.getDestinosMasPopulares(5);
+	}
+	
+	public Billete getBillete(Billete billete) throws Exception{
+		return billeteDataService.getBilleteByIdAndUser(billete);
 	}
 	
 
 	public Billete getReserva(ParamBuscarReserva paramBuscarReserva) throws Exception{
 		Billete billete = new Billete();
+		
+		//Tenemos que buscar un billete en base a su ID y la persona que hizo la reserva.
 		billete.setBilleteId(paramBuscarReserva.getIdReserva());
-		/*
+		
 		Usuario usuario = new Usuario();
 		usuario.setMail(paramBuscarReserva.getMail());
 		usuario = usuarioManagerService.getUsuario(usuario);
-		*/
-		//Me dan el codigo de la reserva
-		//Obtener datos reserva completa
-		billete = this.getBillete(billete);
 		
-		if(billete != null){
-			//ObtenerDatosUsuario
-			Usuario usuario = new Usuario();
-			usuario.setMail(paramBuscarReserva.getMail());
-			usuario = usuarioManagerService.getUsuario(usuario);
-		
-			if(usuario != null){
-				if(billete.getUsuarioId() == usuario.getUsuarioId()){
-					return billete;
+		if (usuario != null){
+			
+			billete.setUsuarioId(usuario.getUsuarioId());
+			//Me dan el codigo de la reserva
+			//Obtener datos reserva completa
+			billete = this.getBillete(billete);
+			if(billete != null){
+				//Obtenemos la información de los viajes relacionados con el billete
+				Viaje viajeIda = new Viaje();
+				viajeIda.setViajeId(billete.getViajeId());
+				billete.setViajeIda(viajeManagerService.getViaje(viajeIda));
+				
+				if(billete.getTipo().equals(Billete.VUELTA)){
+					Viaje viajeVuelta = new Viaje();
+					viajeVuelta.setViajeId(billete.getBilleteVueltaId());
+					billete.setViajeVuelta(viajeManagerService.getViaje(viajeVuelta));
 				}
 			}
+			return billete;
 		}
 		return null;
 	}
@@ -194,19 +211,22 @@ public class BilleteManager implements BilleteManagerService {
 	
 	@Override
 	public Vector<Billete> getBilletesUsuario(Usuario usuario) throws Exception{
-		Vector<Billete> billetes = billeteDataService.getBilletesUsuario(usuario);
-		for ( Billete billete: billetes){
-			Viaje viajeIda = new Viaje();
-			viajeIda.setViajeId(billete.getViajeId());
-			billete.setViajeIda(viajeManagerService.getViaje(viajeIda));
-			
-			if(billete.getTipo().equals(Billete.VUELTA)){
-				Viaje viajeVuelta = new Viaje();
-				viajeVuelta.setViajeId(billete.getBilleteVueltaId());
-				billete.setViajeVuelta(viajeManagerService.getViaje(viajeVuelta));
+		if(usuario != null){
+			Vector<Billete> billetes = billeteDataService.getBilletesUsuario(usuario);
+			for ( Billete billete: billetes){
+				Viaje viajeIda = new Viaje();
+				viajeIda.setViajeId(billete.getViajeId());
+				billete.setViajeIda(viajeManagerService.getViaje(viajeIda));
+				
+				if(billete.getTipo().equals(Billete.VUELTA)){
+					Viaje viajeVuelta = new Viaje();
+					viajeVuelta.setViajeId(billete.getBilleteVueltaId());
+					billete.setViajeVuelta(viajeManagerService.getViaje(viajeVuelta));
+				}
 			}
+			return billetes;
 		}
-		return billetes;
+		else return null;
 	}
 
 	

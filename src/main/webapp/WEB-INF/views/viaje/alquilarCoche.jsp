@@ -9,6 +9,7 @@
 		<br/>
 		
 		<p>
+		<label><spring:message code="alquilar.label"/></label>
 		<form:select path="cocheTipo">		
 			<option value="Ninguno"><spring:message code="alquilar.ninguno"/></option>
 			<option value="Utilitario"><spring:message code="alquilar.utilitario"/></option>
@@ -17,7 +18,7 @@
 		</p>
 
 		<spring:message code="seleccionar" var="seleccionar"/>
-		<input type="submit" value="${seleccionar}"/>
+		<input class="btn btn-dark btn-lg" type="submit" value="${seleccionar}"/>
 	</form:form>
 		
 

@@ -46,5 +46,4 @@
 	<bean id="sendMailManagerService" class="impl.miw.infrastructure.SendMailManagerEJBService" />
 	<bean id="sendMailManager" class="impl.miw.infrastructure.SendMailManager" />
 
-
-</beans>
+	<bean id="webexpressionHandler" class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler" /></beans>

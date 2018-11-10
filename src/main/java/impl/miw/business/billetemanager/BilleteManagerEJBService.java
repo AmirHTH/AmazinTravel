@@ -1,5 +1,6 @@
 package impl.miw.business.billetemanager;
 
+import java.util.LinkedHashMap;
 import java.util.Vector;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,6 +62,10 @@ private Integer times=0;
 	@Override
 	public Vector<Billete> getBilletesUsuario(Usuario usuario) throws Exception{
 		return billeteManager.getBilletesUsuario(usuario);
+	}
+	
+	public LinkedHashMap<Integer, String> getDestinosMasPopulares() throws Exception{
+		return billeteManager.getDestinosMasPopulares();
 	}
 
 

@@ -86,5 +86,15 @@ public class ViajeManager implements ViajeManagerService {
 		return viajeDataService.agregarPlazas(viaje, plazas);
 	}
 	
+	@Override
+	public int viajesOrigen(String origen) throws Exception{
+		return viajeDataService.viajesOrigen(origen);
+	}
+	
+	@Override
+	public int viajesDestino(String destino) throws Exception{
+		return viajeDataService.viajesDestino(destino);
+	}
+	
 	
 }

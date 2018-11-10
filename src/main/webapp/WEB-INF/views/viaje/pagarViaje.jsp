@@ -23,9 +23,14 @@
 			<form:errors path="apellidos" class="validationError"/>
 		</p>
 		<p>
-			<form:label path="dni"><spring:message code="pagar.numeroIdentificacion"/></form:label>
+			<form:label path="tipoDocumento"><spring:message code="pagar.tipoDocumento"/></form:label>
+			<form:select path="tipoDocumento">		
+				<option value="nif"><spring:message code="pagar.nif"/></option>
+				<option value="pasaporte"><spring:message code="pagar.pasaporte"/></option>
+				<option value="nie"><spring:message code="pagar.nie"/></option>
+			</form:select>
+			<form:label path="dni"><spring:message code="pagar.numeroDocumento"/></form:label>
 			<form:input path="dni" value="789789789" />
-			<form:errors path="dni" class="validationError"/>
 		</p>
 		
 		<p>
@@ -34,8 +39,10 @@
 			<form:errors path="mail" class="validationError"/>
 		</p>
 		
+		
+		
 		<spring:message code="pagar.form.submit" var="pagar"/>
-		<input type="submit" value="${pagar}" />	
+		<input class="btn btn-dark btn-lg" type="submit" value="${pagar}" />	
 		
 	</form:form>		
 

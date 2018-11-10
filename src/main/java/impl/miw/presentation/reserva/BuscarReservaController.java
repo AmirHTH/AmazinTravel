@@ -37,7 +37,7 @@ public class BuscarReservaController {
     public String buscarReserva(Model model){
 		System.out.println("----- GET BuscarReserva ------");
 		model.addAttribute("paramBuscarReserva", new ParamBuscarReserva());
-		//model.addAttribute("reservaBuscada", new Billete());
+		model.addAttribute("reservaBuscada", null);
 		return "reserva/buscarReserva";
     }
 	
@@ -46,6 +46,7 @@ public class BuscarReservaController {
 	@RequestMapping(value="buscarReserva", method = RequestMethod.POST)
 	public String buscarReserva(@Valid @ModelAttribute ParamBuscarReserva paramBuscarReserva, BindingResult result, Model model ) throws Exception
 	{
+		
 		if ( result.hasErrors())
 		{
 			System.out.println("---- Has Errors -----");
@@ -53,8 +54,17 @@ public class BuscarReservaController {
 			
 		}else{
 			Billete billete = billeteManagerService.getReserva(paramBuscarReserva);
-			model.addAttribute("billete", billete);
+			if(billete == null){
+				System.out.println("Billete es NULL");
+				model.addAttribute("reservaBuscada", null);
+				//model.addAttribute("mensajeError", "No se ha encontrado la reserva");
+				model.addAttribute("mensajeError", "buscarReserva.reservaNoEncontrada");
+			}else{
+				model.addAttribute("reservaBuscada", billete);
+				model.addAttribute("mensajeError", null);
+			}
 			model.addAttribute("paramBuscarReserva", paramBuscarReserva);
+			
 			//Subimos al modelo los parámetros de búsqueda por si se nos ordena una cancelación
 			//model.addAttribute("paramBuscarReserva", paramBuscarReserva);
 	     	

@@ -27,6 +27,8 @@ public class DatosCobro {
 	@NotEmpty
 	private String mail;
 	
+	private String tipoDocumento;
+	
 	
 	/**
 	 * @return the usuarioId
@@ -89,6 +91,16 @@ public class DatosCobro {
 		this.mail = mail;
 	}
 	
+	
+	
+	public String getTipoDocumento() {
+		return tipoDocumento;
+	}
+	public void setTipoDocumento(String tipoDocumento) {
+		this.tipoDocumento = tipoDocumento;
+	}
+	
+	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
@@ -143,11 +155,5 @@ public class DatosCobro {
 			return false;
 		return true;
 	}
-
-
-	
-	
-	
-	
 
 }

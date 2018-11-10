@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.LinkedHashMap;
 import java.util.Vector;
 
 import com.miw.model.Billete;
@@ -17,16 +18,11 @@ public class BilleteDAO implements BilleteDataService{
 
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		Connection con = null;
+		Connection con = conectarConBD();
 
 		try {
-			String SQL_DRV = "org.hsqldb.jdbcDriver";
-			String SQL_URL = "jdbc:hsqldb:hsql://localhost/amazin";
-
-			// Obtenemos la conexiï¿½n a la base de datos.
-			Class.forName(SQL_DRV);
-			con = DriverManager.getConnection(SQL_URL, "dflanvin", "amazin");
-
+			
+			
 			ps = con.prepareStatement("select max(billeteid) as maximo from billete");
 			rs = ps.executeQuery();
 			Integer id=0;
@@ -37,7 +33,7 @@ public class BilleteDAO implements BilleteDataService{
 			System.out.println("Máximo id encontrado: "+id);
 			System.out.println(billete);
 			
-			billete.setBilleteId((id));
+			billete.setBilleteId((id+1));
 			//Creamos el billete
 			
 			/*
@@ -107,32 +103,38 @@ public class BilleteDAO implements BilleteDataService{
 	}
 	
 	@Override
-	public Billete getBillete(Billete billete) throws Exception {
+	public Billete getBilleteByIdAndUser(Billete billete) throws Exception {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		Connection con = conectarConBD();
-
+		Billete billeteEncontrado = null;
 
 		try {	
-			ps = con.prepareStatement("select * from billete where billeteid = ?");
+			ps = con.prepareStatement("select * from billete where billeteid=? and usuarioid=?");
 			ps.setInt(1, billete.getBilleteId()); //Si lo quiere Ida y Vuelta, en la Vuelta, el sitio de Destino será donde se inicie el vuelo
+			ps.setInt(2, billete.getUsuarioId());
 			rs = ps.executeQuery();
 			
-			billete = null;
-
-			while (rs.next()) {
+			//billete = null;
+			
+			if (rs.next() ) {
+				billeteEncontrado = new Billete();
 				// Completamos los datos del viaje en la entidad
-				billete = new Billete();
-				billete.setViajeId(rs.getInt("Billeteid"));
-				billete.setViajeId(rs.getInt("VIAJEID"));
-				billete.setUsuarioId(rs.getInt("USUARIOID"));
-				billete.setPlazas(rs.getInt("PLAZAS_COMPRADAS"));
-				billete.setNumMaletas15(rs.getInt("MALETAS15"));
-				billete.setNumMaletas20(rs.getInt("MALETAS20"));
-				billete.setCocheTipo(rs.getString("COCHE"));
-				billete.setPrecioFinal(rs.getDouble("PRECIOFINAL"));
-				billete.setEstado(rs.getString("ESTADO"));
-				billete.setBilleteVueltaId(rs.getInt("BILLETEVUELTAID"));
+				
+				billeteEncontrado.setBilleteId(rs.getInt("BilleteId"));
+				billeteEncontrado.setViajeId(rs.getInt("VIAJEID"));
+				billeteEncontrado.setUsuarioId(rs.getInt("USUARIOID"));
+				billeteEncontrado.setPlazas(rs.getInt("PLAZAS_COMPRADAS"));
+				billeteEncontrado.setNumMaletas15(rs.getInt("MALETAS15"));
+				billeteEncontrado.setNumMaletas20(rs.getInt("MALETAS20"));
+				billeteEncontrado.setCocheTipo(rs.getString("COCHE"));
+				billeteEncontrado.setPrecioFinal(rs.getDouble("PRECIOFINAL"));
+				billeteEncontrado.setEstado(rs.getString("ESTADO"));
+				billeteEncontrado.setBilleteVueltaId(rs.getInt("BILLETEVUELTAID"));
+				
+				if(billeteEncontrado.getBilleteVueltaId() != 0){
+					billeteEncontrado.setTipo(Billete.VUELTA);
+				}
 				
 			}
 			
@@ -147,7 +149,7 @@ public class BilleteDAO implements BilleteDataService{
 			}
 		}
 		// Retornamos el vector de resultado.
-		return billete;
+		return billeteEncontrado;
 	}
 	
 	
@@ -157,11 +159,12 @@ public class BilleteDAO implements BilleteDataService{
 		ResultSet rs = null;
 		Connection con = conectarConBD();
 		
+
 		Vector<Billete> resultado = new Vector<Billete>();
 
-
+		
 		try {	
-			ps = con.prepareStatement("select * from billete where usuarioid = ?");
+			ps = con.prepareStatement("select * from billete where usuarioId = ?");
 			ps.setInt(1, usuario.getUsuarioId()); //Si lo quiere Ida y Vuelta, en la Vuelta, el sitio de Destino será donde se inicie el vuelo
 			rs = ps.executeQuery();
 			
@@ -180,6 +183,11 @@ public class BilleteDAO implements BilleteDataService{
 				billete.setPrecioFinal(rs.getDouble("PRECIOFINAL"));
 				billete.setEstado(rs.getString("ESTADO"));
 				billete.setBilleteVueltaId(rs.getInt("BILLETEVUELTAID"));
+				
+				if(billete.getBilleteVueltaId() != 0){
+					billete.setTipo(Billete.VUELTA);
+				}
+				
 				resultado.add(billete);
 			}
 			
@@ -226,6 +234,11 @@ public class BilleteDAO implements BilleteDataService{
 				billete.setPrecioFinal(rs.getDouble("PRECIOFINAL"));
 				billete.setEstado(rs.getString("ESTADO"));
 				billete.setBilleteVueltaId(rs.getInt("BILLETEVUELTAID"));
+				
+				if(billete.getBilleteVueltaId() != 0){
+					billete.setTipo(Billete.VUELTA);
+				}
+				
 				resultado.add(billete);
 			}
 			
@@ -248,8 +261,11 @@ public class BilleteDAO implements BilleteDataService{
 		Connection con = null;
 
 		try {
-			String SQL_DRV = "org.hsqldb.jdbcDriver";
-			String SQL_URL = "jdbc:hsqldb:hsql://localhost/amazin";
+			//String SQL_DRV = "org.hsqldb.jdbcDriver";
+			//String SQL_URL = "jdbc:hsqldb:hsql://localhost/amazin";
+			
+			String SQL_DRV = "org.mariadb.jdbc.Driver";
+			String SQL_URL = "jdbc:mariadb://localhost/amazin";
 
 			// Obtenemos la conexion a la base de datos.
 			Class.forName(SQL_DRV);
@@ -258,6 +274,42 @@ public class BilleteDAO implements BilleteDataService{
 		}catch(Exception e){
 			return null;
 		}
+	}
+	
+	
+	@Override
+	public LinkedHashMap<Integer,String> getDestinosMasPopulares(int numeroResultados) throws Exception {
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Connection con = conectarConBD();
+		
+		LinkedHashMap<Integer, String> resultado = new LinkedHashMap<Integer, String> ();
+
+
+		try {	
+			ps = con.prepareStatement("select count(*) as numero_viajes, sum(billete.PLAZAS_COMPRADAS) as numero_plazas, destino from billete left join viaje on billete.VIAJEID=viaje.viajeID or billete.BILLETEVUELTAID=viaje.viajeID where estado='Confirmado' group by destino order by numero_plazas desc limit ?");
+			ps.setInt(1, numeroResultados);
+			rs = ps.executeQuery();
+			
+			
+
+			while (rs.next()) {
+				// Completamos los datos del billete en la entidad
+				resultado.put(rs.getInt("numero_plazas"), rs.getString("destino"));
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw (e);
+		} finally {
+			try {
+				ps.close();
+				con.close();
+			} catch (Exception e) {
+			}
+		}
+		// Retornamos el vector de resultado.
+		return resultado;
 	}
 	
 	

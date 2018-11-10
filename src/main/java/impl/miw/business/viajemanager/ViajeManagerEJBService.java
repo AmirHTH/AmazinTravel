@@ -4,7 +4,6 @@ import java.util.Vector;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-
 import com.miw.business.ViajeManagerService;
 import com.miw.model.ParamBusquedaViaje;
 import com.miw.model.Viaje;
@@ -73,6 +72,18 @@ public class ViajeManagerEJBService implements ViajeManagerService{
 	public boolean agregarPlazas(Viaje viaje, int plazas) throws Exception{
 		return viajeManager.agregarPlazas(viaje, plazas);
 	}
+	
+	@Override
+	public int viajesOrigen(String origen) throws Exception{
+		return viajeManager.viajesOrigen(origen);
+	}
+	
+	@Override
+	public int viajesDestino(String destino) throws Exception{
+		return viajeManager.viajesDestino(destino);
+	}
+	
+	
 	
 	
 	

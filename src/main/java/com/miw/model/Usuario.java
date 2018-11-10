@@ -3,12 +3,18 @@
  */
 package com.miw.model;
 
+import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
+
+import com.miw.model.validators.PasswordConfirmationConstraint;
+import com.miw.model.validators.PasswordSecurityConstraint;
 
 /**
  * @author Amir H. Tofigh Halati UO240753
  *
  */
+@PasswordConfirmationConstraint
+@PasswordSecurityConstraint
 public class Usuario {
 	private int usuarioId;
 	
@@ -21,9 +27,41 @@ public class Usuario {
 	@NotEmpty
 	private String dni;
 	
+	@Email
 	@NotEmpty
 	private String mail;
 	
+	private String tipoDocumento;
+	
+	public final static String NIF = "pagar.nif";
+	public final static String PASAPORTE = "pagar.pasaporte";
+	public final static String NIE = "pagar.nie";
+	
+	private String password;
+	
+	private String passwordConfirmation;
+	
+	
+	
+	public String getPassword() {
+		return password;
+	}
+	
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
+	
+	
+	public String getPasswordConfirmation() {
+		return passwordConfirmation;
+	}
+
+	public void setPasswordConfirmation(String passwordConfirmation) {
+		this.passwordConfirmation = passwordConfirmation;
+	}
+	
+
 	/**
 	 * @return the usuarioId
 	 */
@@ -85,6 +123,29 @@ public class Usuario {
 		this.mail = mail;
 	}
 	
+	public String getTipoDocumento() {
+		return tipoDocumento;
+	}
+	public void setTipoDocumento(String tipoDocumento) {
+		this.tipoDocumento = tipoDocumento;
+	}
+	
+	
+	
+	
+	public String getNif() {
+		return NIF;
+	}
+
+	public String getPasaporte() {
+		return PASAPORTE;
+	}
+
+	public String getNie() {
+		return NIE;
+	}
+	
+
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
@@ -120,8 +181,8 @@ public class Usuario {
 		if (getClass() != obj.getClass())
 			return false;
 		Usuario other = (Usuario) obj;
-		if (apellidos == null) {
-			if (other.apellidos != null)
+		if (mail == null) {
+			if (other.mail != null)
 				return false;
 		} else if (!apellidos.equals(other.apellidos))
 			return false;

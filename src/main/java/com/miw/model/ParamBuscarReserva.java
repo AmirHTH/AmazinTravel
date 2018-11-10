@@ -2,8 +2,12 @@ package com.miw.model;
 
 
 
+
 import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.Range;
 
 
 public class ParamBuscarReserva {
@@ -11,6 +15,8 @@ public class ParamBuscarReserva {
 	@NotNull
 	private Integer idReserva;
 	
+	
+	@Email
 	@NotEmpty
 	private String mail;
 

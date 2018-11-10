@@ -5,29 +5,39 @@ import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.Future;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import com.miw.model.validators.DestinoConstraint;
+import com.miw.model.validators.OrigenConstraint;
 import com.miw.model.validators.VueltaConstraint;
+
 
 @VueltaConstraint
 public class ParamBusquedaViaje {
+	
+	@OrigenConstraint
 	@NotEmpty(message="Debe indicar un Origen.")
 	private String origen;
 	
+	@DestinoConstraint
 	@NotEmpty(message="Debe indicar un Destino.")
 	private String destino;
 	
+	@Future
 	@NotNull(message="Debe indicar una Fecha de Salida.")
 	@DateTimeFormat(pattern = "dd-MM-yyyy")
 	private Date fechaIda;
 	
-	
+	@Future
 	@DateTimeFormat(pattern = "dd-MM-yyyy")
 	private Date fechaVuelta;
 	
-	@NotNull(message="Debe indicar un número de Plazasl.")
+	@Min(1)
+	@NotNull(message="Debe indicar un número de Plazas.")
 	private Integer plazas;
 	
 	@NotEmpty

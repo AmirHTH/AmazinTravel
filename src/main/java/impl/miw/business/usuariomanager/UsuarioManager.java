@@ -32,13 +32,15 @@ public class UsuarioManager implements UsuarioManagerService {
 	}
 	
 	public Usuario getUsuario(Usuario usuario) throws Exception{
+		return this.usuarioDataService.getUsuario(usuario);
+		/*
 		Vector<Usuario> usuarios = usuarioDataService.getAllUsuarios();
 		for (Usuario usuarioBD: usuarios){
-			if(usuarioBD.getMail().equals(usuario)){
+			if(usuarioBD.getMail().equals(usuario.getMail())){
 				return usuarioBD;
 			}
 		}
-		return null;
+		return null;*/
 	}
 	
 	public Usuario getUsuarioById(Usuario usuario) throws Exception{

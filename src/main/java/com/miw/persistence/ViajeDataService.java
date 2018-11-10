@@ -5,6 +5,7 @@ package com.miw.persistence;
 
 import java.util.ArrayList;
 import java.util.Vector;
+
 import com.miw.model.ParamBusquedaViaje;
 import com.miw.model.Viaje;
 
@@ -27,6 +28,9 @@ public interface ViajeDataService {
 	
 	public boolean restarPlazas(Viaje viaje, int plazas) throws Exception;
 	public boolean agregarPlazas(Viaje viaje, int plazas) throws Exception;
+	
+	public int viajesOrigen(String origen) throws Exception;
+	public int viajesDestino(String destino) throws Exception;
 	
 	//public boolean creaViaje(Viaje viaje) throws Exception;
 	

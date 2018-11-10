@@ -27,6 +27,12 @@ public class Billete {
 	
 	private String tipo = SOLO_IDA ;
 	
+	private double precioMaleta15;
+	private double precioMaleta20;
+	
+	private double precioCocheAlquilerUtilitario;
+	private double precioCocheAlquilerFurgoneta;
+	
 	public final static double PRECIO_MALETA_15 = 15.0;
 	public final static double PRECIO_MALETA_20 = 20.0;
 	
@@ -45,6 +51,23 @@ public class Billete {
 	public final static String ESTADO_SIN_CONFIRMAR = "Sin Confirmar";
 	
 	
+	
+	
+	public double getPrecioCocheAlquilerUtilitario() {
+		return PRECIO_COCHE_ALQUILER_UTILITARIO;
+	}
+
+	public double getPrecioCocheAlquilerFurgoneta() {
+		return PRECIO_COCHE_ALQUILER_FURGONETA;
+	}
+
+	public double getPrecioMaleta15() {
+		return PRECIO_MALETA_15;
+	}
+	
+	public double getPrecioMaleta20() {
+		return PRECIO_MALETA_20;
+	}
 	
 	
 	public int getBilleteVueltaId() {

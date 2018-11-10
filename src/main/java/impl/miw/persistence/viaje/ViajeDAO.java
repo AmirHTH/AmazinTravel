@@ -4,8 +4,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Vector;
 
 import com.miw.model.ParamBusquedaViaje;
@@ -31,11 +29,14 @@ public class ViajeDAO implements ViajeDataService {
 		Connection con = null;
 
 		try {
-			String SQL_DRV = "org.hsqldb.jdbcDriver";
-			String SQL_URL = "jdbc:hsqldb:hsql://localhost/amazin";
+			//String SQL_DRV = "org.hsqldb.jdbcDriver";
+			//String SQL_URL = "jdbc:hsqldb:hsql://localhost/amazin";
+			
+			String SQL_DRV = "org.mariadb.jdbc.Driver";
+			String SQL_URL = "jdbc:mariadb://localhost/amazin";
 
 			// Obtenemos la conexion a la base de datos.
-			Class.forName(SQL_DRV);
+			Class.forName("org.mariadb.jdbc.Driver");
 			con = DriverManager.getConnection(SQL_URL, "dflanvin", "amazin");
 
 			ps = con.prepareStatement("select * from viaje");
@@ -90,14 +91,18 @@ public class ViajeDAO implements ViajeDataService {
 		Connection con = null;
 
 		try {
-			String SQL_DRV = "org.hsqldb.jdbcDriver";
-			String SQL_URL = "jdbc:hsqldb:hsql://localhost/amazin";
+			//String SQL_DRV = "org.hsqldb.jdbcDriver";
+			//String SQL_URL = "jdbc:hsqldb:hsql://localhost/amazin";
+			
+			String SQL_DRV = "org.mariadb.jdbc.Driver";
+			String SQL_URL = "jdbc:mariadb://localhost/amazin";
 
 			// Obtenemos la conexion a la base de datos.
-			Class.forName(SQL_DRV);
+			Class.forName("org.mariadb.jdbc.Driver");
 			con = DriverManager.getConnection(SQL_URL, "dflanvin", "amazin");
 			return con;
 		}catch(Exception e){
+			e.printStackTrace();
 			return null;
 		}
 	}
@@ -277,6 +282,7 @@ public class ViajeDAO implements ViajeDataService {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		Connection con = conectarConBD();
+		Viaje viajeEncontrado = null;
 
 		try {	
 			ps = con.prepareStatement("select * from viaje where viajeid = ?");
@@ -284,14 +290,15 @@ public class ViajeDAO implements ViajeDataService {
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
+				viajeEncontrado = new Viaje();
 				// Completamos los datos del viaje en la entidad
-				viaje.setViajeId(rs.getInt("viajeid"));
-				viaje.setOrigen(rs.getString("origen"));
-				viaje.setDestino(rs.getString("destino"));
-				viaje.setF_salida(rs.getTimestamp("f_salida"));
-				viaje.setPlazas_totales(rs.getInt("PLAZAS_TOTALES"));
-				viaje.setPlazas_quedan(rs.getInt("PLAZAS_QUEDAN"));
-				viaje.setPrecio(rs.getDouble("precio"));
+				viajeEncontrado.setViajeId(rs.getInt("viajeid"));
+				viajeEncontrado.setOrigen(rs.getString("origen"));
+				viajeEncontrado.setDestino(rs.getString("destino"));
+				viajeEncontrado.setF_salida(rs.getTimestamp("f_salida"));
+				viajeEncontrado.setPlazas_totales(rs.getInt("PLAZAS_TOTALES"));
+				viajeEncontrado.setPlazas_quedan(rs.getInt("PLAZAS_QUEDAN"));
+				viajeEncontrado.setPrecio(rs.getDouble("precio"));
 			}
 
 		} catch (Exception e) {
@@ -305,7 +312,7 @@ public class ViajeDAO implements ViajeDataService {
 			}
 		}
 		// Retornamos el vector de resultado.
-		return viaje;
+		return viajeEncontrado;
 	}
 	
 	
@@ -379,6 +386,70 @@ public class ViajeDAO implements ViajeDataService {
 		}
 		
 		return true;
+	}
+	
+	@Override
+	public int viajesOrigen(String origen) throws Exception{
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Connection con = conectarConBD();
+		
+		int numeroViajesOrigen = 0;
+
+		try {	
+			ps = con.prepareStatement("select count(*) as recuento from viaje where origen = ?");
+			ps.setString(1, origen); //Si lo quiere Ida y Vuelta, en la Vuelta, el sitio de Destino será donde se inicie el vuelo
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				// Completamos los datos del viaje en la entidad
+				numeroViajesOrigen = rs.getInt("recuento");
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw (e);
+		} finally {
+			try {
+				ps.close();
+				con.close();
+			} catch (Exception e) {
+			}
+		}
+		// Retornamos el vector de resultado.
+		return numeroViajesOrigen;
+	}
+	
+	@Override
+	public int viajesDestino(String destino) throws Exception{
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Connection con = conectarConBD();
+		
+		int numeroViajesDestino = 0;
+
+		try {	
+			ps = con.prepareStatement("select count(*) as recuento from viaje where destino = ?");
+			ps.setString(1, destino); //Si lo quiere Ida y Vuelta, en la Vuelta, el sitio de Destino será donde se inicie el vuelo
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				// Completamos los datos del viaje en la entidad
+				numeroViajesDestino = rs.getInt("recuento");
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw (e);
+		} finally {
+			try {
+				ps.close();
+				con.close();
+			} catch (Exception e) {
+			}
+		}
+		// Retornamos el vector de resultado.
+		return numeroViajesDestino;
 	}
 	
 	

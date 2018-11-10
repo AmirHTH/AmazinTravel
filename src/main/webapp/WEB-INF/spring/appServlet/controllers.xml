@@ -11,8 +11,7 @@
 
 	<!-- Scans within the base package of the application for @Components to 
 		configure as beans -->
-	<security:global-method-security
-		secured-annotations="enabled" />
+	<security:global-method-security secured-annotations="enabled" />
 
 	<mvc:annotation-driven />
 	<mvc:resources mapping="/resources/**" location="/resources/" />

@@ -50,10 +50,6 @@ public class AgregarMaletasFacturadasController {
 	
 	
 	
-	@RequestMapping(value="facturar", method=RequestMethod.GET)
-    public String facturar(){
-		return "viaje/facturar";
-    }
 	
 	/*
 	@RequestMapping(value="private/alquilarCoche", method=RequestMethod.GET)
@@ -84,6 +80,17 @@ public class AgregarMaletasFacturadasController {
 	}
 
 	*/
+	
+	
+	@RequestMapping(value="facturar", method=RequestMethod.GET)
+    public String facturar(@ModelAttribute Billete billete, Model model){
+		System.out.println("----- GET Facturar------");
+		System.out.println("Num maletas: " + billete.getNumMaletas15());
+		model.addAttribute("billete", billete);
+		return "viaje/facturar";
+    }
+	
+	
 	@RequestMapping(value="facturar", method = RequestMethod.POST)
 	public String facturar(@ModelAttribute Billete billete, Model model, BindingResult result ) throws Exception
 	{
